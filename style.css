@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0; padding: 0;
+  background: #f9f9f9;
+  color: #333;
+  text-align: center;
+}
+header {
+  padding: 2rem;
+}
+.logo {
+  width: 100px;
+}
+#addMetaMask {
+  background-color: #3366ff;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  margin: 1rem;
+  cursor: pointer;
+}
+.lang-switcher select {
+  margin-top: 1rem;
+  padding: 0.4rem;
+}
+#tokenomics {
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 700px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+}
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #777;
+}
