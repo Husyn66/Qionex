@@ -1,354 +1,42 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
-
-/**
- * @title Qionex Token (QNX)
- * @dev Quantum-level token optimized for Polygon network
- * @dev Ultra-low fees, lightning-fast transactions
- * @author Qionex Team
- * @notice Visit: https://qionex.com
- */
-contract QionexToken {
-    
-    // Token Information
-    string public constant name = "Qionex";
-    string public constant symbol = "QNX";
-    uint8 public constant decimals = 18;
-    uint256 public totalSupply;
-    
-    // Owner and addresses
-    address public owner;
-    address public treasury;
-    address public marketing;
-    
-    // Mappings
-    mapping(address => uint256) public balances;
-    mapping(address => mapping(address => uint256)) public allowances;
-    mapping(address => bool) public authorized;
-    mapping(address => bool) public blacklisted;
-    
-    // Trading and fees
-    bool public tradingEnabled = false;
-    uint256 public buyFee = 300; // 3%
-    uint256 public sellFee = 300; // 3%
-    uint256 public constant MAX_FEE = 1000; // 10% max
-    
-    // Anti-whale and limits
-    uint256 public maxTransaction;
-    uint256 public maxWallet;
-    bool public limitsEnabled = true;
-    
-    // Events
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-    event TradingEnabled(bool enabled);
-    event FeesUpdated(uint256 buyFee, uint256 sellFee);
-    event LimitsUpdated(uint256 maxTransaction, uint256 maxWallet);
-    event AuthorizationChanged(address indexed user, bool authorized);
-    event BlacklistUpdated(address indexed user, bool blacklisted);
-    
-    // Modifiers
-    modifier onlyOwner() {
-        require(msg.sender == owner, "QNX: Not owner");
-        _;
-    }
-    
-    modifier onlyAuthorized() {
-        require(authorized[msg.sender] || msg.sender == owner, "QNX: Not authorized");
-        _;
-    }
-    
-    modifier tradingAllowed() {
-        require(tradingEnabled || authorized[msg.sender], "QNX: Trading not enabled");
-        _;
-    }
-    
-    modifier notBlacklisted(address user) {
-        require(!blacklisted[user], "QNX: Blacklisted");
-        _;
-    }
-    
-    constructor() {
-        owner = msg.sender;
-        treasury = msg.sender;
-        marketing = msg.sender;
-        
-        // Initial supply: 1 billion QNX
-        totalSupply = 1_000_000_000 * 10**decimals;
-        balances[owner] = totalSupply;
-        
-        // Set initial limits (1% of supply)
-        maxTransaction = totalSupply / 100;
-        maxWallet = totalSupply / 100;
-        
-        // Authorize owner
-        authorized[owner] = true;
-        
-        emit Transfer(address(0), owner, totalSupply);
-        emit OwnershipTransferred(address(0), owner);
-    }
-    
-    /**
-     * @dev Standard ERC20 transfer with Qionex optimizations
-     */
-    function transfer(address to, uint256 amount) 
-        external 
-        tradingAllowed 
-        notBlacklisted(msg.sender) 
-        notBlacklisted(to) 
-        returns (bool) 
-    {
-        _transfer(msg.sender, to, amount);
-        return true;
-    }
-    
-    /**
-     * @dev Standard ERC20 transferFrom
-     */
-    function transferFrom(address from, address to, uint256 amount) 
-        external 
-        tradingAllowed 
-        notBlacklisted(from) 
-        notBlacklisted(to) 
-        returns (bool) 
-    {
-        uint256 currentAllowance = allowances[from][msg.sender];
-        require(currentAllowance >= amount, "QNX: Transfer exceeds allowance");
-        
-        unchecked {
-            allowances[from][msg.sender] = currentAllowance - amount;
-        }
-        
-        _transfer(from, to, amount);
-        return true;
-    }
-    
-    /**
-     * @dev Internal transfer function with fees and limits
-     */
-    function _transfer(address from, address to, uint256 amount) internal {
-        require(from != address(0) && to != address(0), "QNX: Zero address");
-        require(balances[from] >= amount, "QNX: Insufficient balance");
-        
-        // Check limits (skip for authorized addresses)
-        if (limitsEnabled && !authorized[from] && !authorized[to]) {
-            require(amount <= maxTransaction, "QNX: Exceeds max transaction");
-            
-            if (to != address(0)) {
-                require(balances[to] + amount <= maxWallet, "QNX: Exceeds max wallet");
-            }
-        }
-        
-        uint256 transferAmount = amount;
-        uint256 feeAmount = 0;
-        
-        // Calculate fees (skip for authorized addresses)
-        if (!authorized[from] && !authorized[to]) {
-            // Determine if it's a buy or sell (simplified logic)
-            uint256 feeRate = buyFee; // Default to buy fee
-            
-            if (feeRate > 0) {
-                feeAmount = (amount * feeRate) / 10000;
-                transferAmount = amount - feeAmount;
-            }
-        }
-        
-        // Execute transfer
-        unchecked {
-            balances[from] -= amount;
-            balances[to] += transferAmount;
-            
-            if (feeAmount > 0) {
-                balances[treasury] += feeAmount;
-                emit Transfer(from, treasury, feeAmount);
-            }
-        }
-        
-        emit Transfer(from, to, transferAmount);
-    }
-    
-    /**
-     * @dev Quantum-speed batch transfer
-     */
-    function quantumBatchTransfer(address[] calldata recipients, uint256[] calldata amounts) 
-        external 
-        onlyAuthorized 
-    {
-        require(recipients.length == amounts.length, "QNX: Arrays mismatch");
-        require(recipients.length <= 500, "QNX: Too many recipients");
-        
-        uint256 totalAmount;
-        for (uint256 i = 0; i < amounts.length;) {
-            totalAmount += amounts[i];
-            unchecked { ++i; }
-        }
-        
-        require(balances[msg.sender] >= totalAmount, "QNX: Insufficient balance");
-        
-        unchecked {
-            balances[msg.sender] -= totalAmount;
-            
-            for (uint256 i = 0; i < recipients.length; ++i) {
-                balances[recipients[i]] += amounts[i];
-                emit Transfer(msg.sender, recipients[i], amounts[i]);
-            }
-        }
-    }
-    
-    /**
-     * @dev ERC20 approve
-     */
-    function approve(address spender, uint256 amount) external returns (bool) {
-        allowances[msg.sender][spender] = amount;
-        emit Approval(msg.sender, spender, amount);
-        return true;
-    }
-    
-    /**
-     * @dev Get allowance
-     */
-    function allowance(address owner_, address spender) external view returns (uint256) {
-        return allowances[owner_][spender];
-    }
-    
-    /**
-     * @dev Get balance
-     */
-    function balanceOf(address account) external view returns (uint256) {
-        return balances[account];
-    }
-    
-    /**
-     * @dev Enable/disable trading
-     */
-    function enableTrading(bool _enabled) external onlyOwner {
-        tradingEnabled = _enabled;
-        emit TradingEnabled(_enabled);
-    }
-    
-    /**
-     * @dev Update fees
-     */
-    function updateFees(uint256 _buyFee, uint256 _sellFee) external onlyOwner {
-        require(_buyFee <= MAX_FEE && _sellFee <= MAX_FEE, "QNX: Fee too high");
-        buyFee = _buyFee;
-        sellFee = _sellFee;
-        emit FeesUpdated(_buyFee, _sellFee);
-    }
-    
-    /**
-     * @dev Update limits
-     */
-    function updateLimits(uint256 _maxTransaction, uint256 _maxWallet, bool _enabled) external onlyOwner {
-        maxTransaction = _maxTransaction;
-        maxWallet = _maxWallet;
-        limitsEnabled = _enabled;
-        emit LimitsUpdated(_maxTransaction, _maxWallet);
-    }
-    
-    /**
-     * @dev Set authorization
-     */
-    function setAuthorization(address user, bool _authorized) external onlyOwner {
-        authorized[user] = _authorized;
-        emit AuthorizationChanged(user, _authorized);
-    }
-    
-    /**
-     * @dev Update blacklist
-     */
-    function updateBlacklist(address user, bool _blacklisted) external onlyOwner {
-        blacklisted[user] = _blacklisted;
-        emit BlacklistUpdated(user, _blacklisted);
-    }
-    
-    /**
-     * @dev Batch blacklist update
-     */
-    function batchBlacklist(address[] calldata users, bool _blacklisted) external onlyOwner {
-        for (uint256 i = 0; i < users.length;) {
-            blacklisted[users[i]] = _blacklisted;
-            emit BlacklistUpdated(users[i], _blacklisted);
-            unchecked { ++i; }
-        }
-    }
-    
-    /**
-     * @dev Update treasury and marketing addresses
-     */
-    function updateAddresses(address _treasury, address _marketing) external onlyOwner {
-        require(_treasury != address(0) && _marketing != address(0), "QNX: Zero address");
-        treasury = _treasury;
-        marketing = _marketing;
-    }
-    
-    /**
-     * @dev Mint tokens (only owner)
-     */
-    function mint(address to, uint256 amount) external onlyOwner {
-        require(to != address(0), "QNX: Zero address");
-        totalSupply += amount;
-        balances[to] += amount;
-        emit Transfer(address(0), to, amount);
-    }
-    
-    /**
-     * @dev Burn tokens
-     */
-    function burn(uint256 amount) external {
-        require(balances[msg.sender] >= amount, "QNX: Insufficient balance");
-        unchecked {
-            balances[msg.sender] -= amount;
-            totalSupply -= amount;
-        }
-        emit Transfer(msg.sender, address(0), amount);
-    }
-    
-    /**
-     * @dev Transfer ownership
-     */
-    function transferOwnership(address newOwner) external onlyOwner {
-        require(newOwner != address(0), "QNX: Zero address");
-        require(newOwner != owner, "QNX: Same owner");
-        
-        address previousOwner = owner;
-        owner = newOwner;
-        authorized[newOwner] = true;
-        authorized[previousOwner] = false;
-        
-        emit OwnershipTransferred(previousOwner, newOwner);
-    }
-    
-    /**
-     * @dev Emergency functions
-     */
-    function emergencyWithdraw() external onlyOwner {
-        uint256 balance = address(this).balance;
-        if (balance > 0) {
-            payable(owner).transfer(balance);
-        }
-    }
-    
-    /**
-     * @dev Receive MATIC
-     */
-    receive() external payable {}
-    
-    /**
-     * @dev Contract info
-     */
-    function getContractInfo() external pure returns (
-        string memory tokenName,
-        string memory tokenSymbol,
-        string memory website,
-        string memory description
-    ) {
-        return (
-            "Qionex",
-            "QNX",
-            "https://qionex.com",
-            "Quantum-level token on Polygon - Ultra-fast, ultra-low fees"
-        );
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qionex (QNX) - Quantum-Level Token on Polygon. Ultra-fast, ultra-low fees." />
+  <meta name="keywords" content="Qionex, QNX, Polygon, crypto token, DeFi, blockchain" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Qionex Token (QNX)" />
+  <meta property="og:image" content="assets/qionex-logo.png" />
+  <title>Qionex (QNX) - Quantum Token</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="assets/qionex-logo.png" alt="Qionex Logo" class="logo" />
+    <h1>Qionex</h1>
+    <p id="tagline">Quantum-Level Token Optimized for Polygon</p>
+    <button id="addMetaMask">Add QNX to MetaMask</button>
+    <div class="lang-switcher">
+      <select id="language">
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+      </select>
+    </div>
+  </header>
+  <section id="tokenomics">
+    <h2>Tokenomics</h2>
+    <table>
+      <tr><th>Name</th><th>Symbol</th><th>Total Supply</th><th>Fees</th></tr>
+      <tr><td>Qionex</td><td>QNX</td><td>1,000,000,000 QNX</td><td>3% Buy / 3% Sell</td></tr>
+    </table>
+    <p><strong>Contract:</strong> <a href="https://polygonscan.com/address/0x5B38Da6a701c568545dCfcB03FcB875f56beddC4" target="_blank">0x5B38...beddC4</a></p>
+  </section>
+  <footer>
+    <p>&copy; 2025 Qionex. All rights reserved.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
