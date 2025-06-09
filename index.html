@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Qionex (QNX) - Quantum-Level Token on Polygon. Ultra-fast, ultra-low fees with quantum security.">
-  <meta name="keywords" content="Qionex, QNX, Polygon, crypto token, DeFi, blockchain, quantum security">
   <title>Qionex (QNX) - Quantum Token</title>
   <style>
     * {
@@ -98,6 +97,7 @@
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
       animation: gradient 3s ease infinite;
       margin-bottom: 15px;
     }
@@ -372,6 +372,7 @@
       text-decoration: none;
       font-size: 1.2rem;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .social-links a:hover {
@@ -443,6 +444,12 @@
       .social-links {
         flex-direction: column;
         gap: 15px;
+      }
+
+      .lang-switcher {
+        position: static;
+        margin-bottom: 20px;
+        text-align: center;
       }
     }
   </style>
@@ -606,18 +613,25 @@
 
   <footer>
     <div class="social-links">
-      <a href="#" target="_blank" rel="noopener">🐦 Twitter</a>
-      <a href="#" target="_blank" rel="noopener">💬 Telegram</a>
-      <a href="#" target="_blank" rel="noopener">🎮 Discord</a>
-      <a href="#" target="_blank" rel="noopener">⚡ GitHub</a>
+      <a onclick="showStatus('Twitter coming soon!', 'info')">🐦 Twitter</a>
+      <a onclick="showStatus('Telegram coming soon!', 'info')">💬 Telegram</a>
+      <a onclick="showStatus('Discord coming soon!', 'info')">🎮 Discord</a>
+      <a onclick="showStatus('GitHub coming soon!', 'info')">⚡ GitHub</a>
     </div>
     <p>&copy; 2025 Qionex. All rights reserved. | Quantum-Secured Technology</p>
   </footer>
 
   <script>
+    // Global variables
+    let walletConnected = false;
+    let userAccount = null;
+    let transactionInterval = null;
+
     // Create quantum particles
     function createQuantumParticles() {
       const bg = document.getElementById('quantumBg');
+      if (!bg) return;
+      
       const particleCount = 30;
       
       for (let i = 0; i < particleCount; i++) {
@@ -633,102 +647,19 @@
     // Update QRNG
     function updateQRNG() {
       const qrngDisplay = document.getElementById('qrngNumber');
+      if (!qrngDisplay) return;
+      
       setInterval(() => {
         const quantumNumber = Math.floor(Math.random() * 999999999).toString().padStart(9, '0');
         qrngDisplay.textContent = quantumNumber.match(/.{1,3}/g).join(' ');
       }, 2000);
     }
 
-    // MetaMask token details
-    const QIONEX_TOKEN = {
-      address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
-      symbol: 'QNX',
-      decimals: 18,
-      image: 'https://via.placeholder.com/120x120/00f5ff/ffffff?text=QNX'
-    };
-
-    let walletConnected = false;
-    let userAccount = null;
-
-    // Connect wallet
-    async function connectWallet() {
-      const connectBtn = document.getElementById('connectWallet');
-      const walletStatus = document.getElementById('walletStatus');
-      const connectionStatus = document.getElementById('connectionStatus');
-      const walletAddress = document.getElementById('walletAddress');
-
-      try {
-        if (typeof window.ethereum !== 'undefined') {
-          connectBtn.innerHTML = '<div class="loading"></div> Connecting...';
-          
-          const accounts = await window.ethereum.request({
-            method: 'eth_requestAccounts'
-          });
-          
-          userAccount = accounts[0];
-          walletConnected = true;
-          
-          connectBtn.textContent = '✅ Wallet Connected';
-          connectBtn.disabled = true;
-          connectionStatus.textContent = 'Quantum Wallet Connected';
-          walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
-          walletStatus.classList.add('wallet-connected');
-          
-          showStatus('Wallet connected successfully! Quantum security activated.', 'success');
-          updateTransactionCount();
-          
-        } else {
-          showStatus('MetaMask not detected. Please install MetaMask extension.', 'error');
-        }
-      } catch (error) {
-        console.error('Connection failed:', error);
-        connectBtn.textContent = '🦊 Connect MetaMask';
-        showStatus('Connection failed. Please try again.', 'error');
-      }
-    }
-
-    // Add token to MetaMask
-    async function addTokenToMetaMask() {
-      const addBtn = document.getElementById('addMetaMask');
-
-      try {
-        if (typeof window.ethereum !== 'undefined') {
-          addBtn.innerHTML = '<div class="loading"></div> Adding...';
-          
-          const wasAdded = await window.ethereum.request({
-            method: 'wallet_watchAsset',
-            params: {
-              type: 'ERC20',
-              options: {
-                address: QIONEX_TOKEN.address,
-                symbol: QIONEX_TOKEN.symbol,
-                decimals: QIONEX_TOKEN.decimals,
-                image: QIONEX_TOKEN.image,
-              },
-            },
-          });
-
-          if (wasAdded) {
-            addBtn.textContent = '✅ QNX Added';
-            addBtn.disabled = true;
-            showStatus('QNX token added to MetaMask successfully!', 'success');
-          } else {
-            addBtn.textContent = '➕ Add QNX to MetaMask';
-            showStatus('Token addition cancelled by user.', 'info');
-          }
-        } else {
-          showStatus('MetaMask not detected. Please install MetaMask extension.', 'error');
-        }
-      } catch (error) {
-        console.error('Error adding token:', error);
-        addBtn.textContent = '➕ Add QNX to MetaMask';
-        showStatus('Failed to add token. Please try again.', 'error');
-      }
-    }
-
     // Show status messages
     function showStatus(message, type) {
       const statusDiv = document.getElementById('statusMessage');
+      if (!statusDiv) return;
+      
       statusDiv.className = 'status-message status-' + type;
       statusDiv.textContent = message;
       
@@ -738,14 +669,112 @@
       }, 5000);
     }
 
+    // Connect wallet
+    async function connectWallet() {
+      const connectBtn = document.getElementById('connectWallet');
+      const walletStatus = document.getElementById('walletStatus');
+      const connectionStatus = document.getElementById('connectionStatus');
+      const walletAddress = document.getElementById('walletAddress');
+
+      if (!connectBtn || !walletStatus || !connectionStatus || !walletAddress) return;
+
+      try {
+        if (typeof window.ethereum !== 'undefined') {
+          connectBtn.innerHTML = '<div class="loading"></div> Connecting...';
+          connectBtn.disabled = true;
+          
+          const accounts = await window.ethereum.request({
+            method: 'eth_requestAccounts'
+          });
+          
+          if (accounts && accounts.length > 0) {
+            userAccount = accounts[0];
+            walletConnected = true;
+            
+            connectBtn.textContent = '✅ Wallet Connected';
+            connectionStatus.textContent = 'Quantum Wallet Connected';
+            walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
+            walletStatus.classList.add('wallet-connected');
+            
+            showStatus('Wallet connected successfully! Quantum security activated.', 'success');
+            updateTransactionCount();
+          } else {
+            throw new Error('No accounts found');
+          }
+          
+        } else {
+          showStatus('MetaMask not detected. Please install MetaMask extension.', 'error');
+          connectBtn.disabled = false;
+          connectBtn.textContent = '🦊 Connect MetaMask';
+        }
+      } catch (error) {
+        console.error('Connection failed:', error);
+        connectBtn.textContent = '🦊 Connect MetaMask';
+        connectBtn.disabled = false;
+        showStatus('Connection failed. Please try again.', 'error');
+      }
+    }
+
+    // Add token to MetaMask
+    async function addTokenToMetaMask() {
+      const addBtn = document.getElementById('addMetaMask');
+      if (!addBtn) return;
+
+      const QIONEX_TOKEN = {
+        address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
+        symbol: 'QNX',
+        decimals: 18,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9IiMwMGY1ZmYiLz4KPHRleHQgeD0iNjAiIHk9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iOTAwIj5RTlg8L3RleHQ+Cjwvc3ZnPg=='
+      };
+
+      try {
+        if (typeof window.ethereum !== 'undefined') {
+          addBtn.innerHTML = '<div class="loading"></div> Adding...';
+          addBtn.disabled = true;
+          
+          const wasAdded = await window.ethereum.request({
+            method: 'wallet_watchAsset',
+            params: {
+              type: 'ERC20',
+              options: QIONEX_TOKEN,
+            },
+          });
+
+          if (wasAdded) {
+            addBtn.textContent = '✅ QNX Added';
+            showStatus('QNX token added to MetaMask successfully!', 'success');
+          } else {
+            addBtn.textContent = '➕ Add QNX to MetaMask';
+            addBtn.disabled = false;
+            showStatus('Token addition cancelled by user.', 'info');
+          }
+        } else {
+          showStatus('MetaMask not detected. Please install MetaMask extension.', 'error');
+          addBtn.disabled = false;
+        }
+      } catch (error) {
+        console.error('Error adding token:', error);
+        addBtn.textContent = '➕ Add QNX to MetaMask';
+        addBtn.disabled = false;
+        showStatus('Failed to add token. Please try again.', 'error');
+      }
+    }
+
     // Update transaction count
     function updateTransactionCount() {
       const counter = document.getElementById('transactionCount');
+      if (!counter) return;
+      
       let count = 0;
-      const interval = setInterval(() => {
+      if (transactionInterval) clearInterval(transactionInterval);
+      
+      transactionInterval = setInterval(() => {
         count += Math.floor(Math.random() * 10) + 1;
         counter.textContent = count.toLocaleString();
-        if (count > 1000) clearInterval(interval);
+        if (count > 1000) {
+          clearInterval(transactionInterval);
+          transactionInterval = null;
+        }
       }, 500);
     }
 
@@ -773,44 +802,94 @@
         connectWallet: "🦊 连接 MetaMask",
         addToken: "➕ 添加 QNX 到 MetaMask",
         whitepaper: "📄 白皮书"
+      },
+      es: {
+        tagline: "Token de Seguridad Cuántica en la Red Polygon",
+        connectWallet: "🦊 Conectar MetaMask",
+        addToken: "➕ Agregar QNX a MetaMask",
+        whitepaper: "📄 Libro Blanco"
+      },
+      de: {
+        tagline: "Quantensicherheits-Token im Polygon-Netzwerk",
+        connectWallet: "🦊 MetaMask Verbinden",
+        addToken: "➕ QNX zu MetaMask Hinzufügen",
+        whitepaper: "📄 Whitepaper"
       }
     };
 
     function changeLanguage(lang) {
       const trans = translations[lang] || translations.en;
-      document.getElementById('tagline').textContent = trans.tagline;
-      if (!document.getElementById('connectWallet').disabled) {
-        document.getElementById('connectWallet').textContent = trans.connectWallet;
-      }
-      if (!document.getElementById('addMetaMask').disabled) {
-        document.getElementById('addMetaMask').textContent = trans.addToken;
-      }
-      document.getElementById('viewWhitepaper').textContent = trans.whitepaper;
+      const taglineEl = document.getElementById('tagline');
+      const connectBtn = document.getElementById('connectWallet');
+      const addBtn = document.getElementById('addMetaMask');
+      const whitepaperBtn = document.getElementById('viewWhitepaper');
+      
+      if (taglineEl) taglineEl.textContent = trans.tagline;
+      if (connectBtn && !connectBtn.disabled) connectBtn.textContent = trans.connectWallet;
+      if (addBtn && !addBtn.disabled) addBtn.textContent = trans.addToken;
+      if (whitepaperBtn) whitepaperBtn.textContent = trans.whitepaper;
     }
 
-    // Event listeners
-    document.getElementById('connectWallet').addEventListener('click', connectWallet);
-    document.getElementById('addMetaMask').addEventListener('click', addTokenToMetaMask);
-    document.getElementById('viewWhitepaper').addEventListener('click', openWhitepaper);
-    document.getElementById('language').addEventListener('change', (e) => changeLanguage(e.target.value));
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
+    // Event listeners and initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize particles and QRNG
       createQuantumParticles();
       updateQRNG();
+      
+      // Add event listeners
+      const connectBtn = document.getElementById('connectWallet');
+      const addBtn = document.getElementById('addMetaMask');
+      const whitepaperBtn = document.getElementById('viewWhitepaper');
+      const languageSelect = document.getElementById('language');
+      
+      if (connectBtn) {
+        connectBtn.addEventListener('click', connectWallet);
+      }
+      
+      if (addBtn) {
+        addBtn.addEventListener('click', addTokenToMetaMask);
+      }
+      
+      if (whitepaperBtn) {
+        whitepaperBtn.addEventListener('click', openWhitepaper);
+      }
+      
+      if (languageSelect) {
+        languageSelect.addEventListener('change', function(e) {
+          changeLanguage(e.target.value);
+        });
+      }
       
       // Check if MetaMask is already connected
       if (typeof window.ethereum !== 'undefined') {
         window.ethereum.request({ method: 'eth_accounts' })
           .then(accounts => {
-            if (accounts.length > 0) {
+            if (accounts && accounts.length > 0) {
               userAccount = accounts[0];
               walletConnected = true;
-              document.getElementById('connectWallet').textContent = '✅ Wallet Connected';
-              document.getElementById('connectWallet').disabled = true;
-              document.getElementById('connectionStatus').textContent = 'Quantum Wallet Connected';
-              document.getElementById('walletAddress').textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
-              document.getElementById('walletStatus').classList.add('wallet-connected');
+              
+              const connectBtn = document.getElementById('connectWallet');
+              const connectionStatus = document.getElementById('connectionStatus');
+              const walletAddress = document.getElementById('walletAddress');
+              const walletStatus = document.getElementById('walletStatus');
+              
+              if (connectBtn) {
+                connectBtn.textContent = '✅ Wallet Connected';
+                connectBtn.disabled = true;
+              }
+              
+              if (connectionStatus) {
+                connectionStatus.textContent = 'Quantum Wallet Connected';
+              }
+              
+              if (walletAddress) {
+                walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
+              }
+              
+              if (walletStatus) {
+                walletStatus.classList.add('wallet-connected');
+              }
+              
               updateTransactionCount();
             }
           })
