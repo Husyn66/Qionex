@@ -3,659 +3,771 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qionex (QNX) - Quantum Token</title>
+    <title>Qionex (QNX) - Advanced ERC-20 Token with Governance</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
-            overflow-x: hidden;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
-
+        
+        /* Header */
         header {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 3px solid #00f5ff;
-            background: linear-gradient(45deg, #0a0a0a, #1a1a2e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #00f5ff;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(0, 245, 255, 0.3); }
-            to { box-shadow: 0 0 40px rgba(0, 245, 255, 0.8); }
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            color: #00f5ff;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 40px;
-        }
-
-        .quantum-badge {
-            display: inline-block;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid #00f5ff;
-            border-radius: 50px;
-            padding: 10px 20px;
-            margin: 20px 0;
-            color: #00f5ff;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-
-        button {
-            background: linear-gradient(45deg, #00f5ff, #0066cc);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            min-width: 180px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.3);
-        }
-
-        button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .wallet-status {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px auto;
-            text-align: center;
-            max-width: 500px;
-        }
-
-        .wallet-connected {
-            border-color: #00ff88;
-        }
-
-        .wallet-address {
-            font-family: 'Courier New', monospace;
-            color: #00f5ff;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        .qrng-display {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid #00f5ff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px auto;
-            text-align: center;
-            max-width: 400px;
-        }
-
-        .qrng-number {
-            font-size: 2rem;
-            font-family: 'Courier New', monospace;
-            color: #00f5ff;
-            letter-spacing: 2px;
-            margin-top: 10px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #00f5ff;
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #00f5ff;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: #b0b0b0;
-            font-size: 1rem;
-        }
-
-        .tokenomics {
-            margin: 80px 0;
-            text-align: center;
-        }
-
-        .tokenomics h2 {
-            font-size: 3rem;
-            margin-bottom: 50px;
-            color: #00f5ff;
-        }
-
-        .tokenomics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .token-info {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .token-info:hover {
-            transform: translateY(-5px);
-            border-color: #00f5ff;
-        }
-
-        .token-info h3 {
-            color: #00f5ff;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .info-row:last-child {
-            border-bottom: none;
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
         }
-
-        .contract-address {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 30px 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .contract-address a {
-            color: #00f5ff;
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #64ffda;
             text-decoration: none;
-            word-break: break-all;
         }
-
-        .features {
-            margin: 80px 0;
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
-
-        .features h2 {
-            font-size: 3rem;
+        
+        .nav-links a {
+            color: #e0e7ff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: #64ffda;
+        }
+        
+        .connect-wallet {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .connect-wallet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 8rem 0 4rem;
             text-align: center;
-            margin-bottom: 50px;
-            color: #00f5ff;
+            position: relative;
         }
-
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #64ffda, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #b0bec5;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .token-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+        
+        .token-stat {
+            text-align: center;
+        }
+        
+        .token-stat h3 {
+            font-size: 2rem;
+            color: #64ffda;
+            margin-bottom: 0.5rem;
+        }
+        
+        .token-stat p {
+            color: #b0bec5;
+            font-weight: 500;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #64ffda;
+            border: 2px solid #64ffda;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Features */
+        .features {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #e0e7ff;
+        }
+        
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
-
+        
         .feature-card {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.3s ease;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s;
         }
-
+        
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: #00f5ff;
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+            transform: translateY(-10px);
+            border-color: #64ffda;
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
         }
-
+        
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .status-message {
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px auto;
-            text-align: center;
-            max-width: 500px;
-            display: none;
-        }
-
-        .status-success {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid #00ff88;
-            color: #00ff88;
-        }
-
-        .status-error {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid #ff6b35;
-            color: #ff6b35;
-        }
-
-        .status-info {
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid #00f5ff;
-            color: #00f5ff;
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px 40px;
-            margin-top: 100px;
-            border-top: 1px solid rgba(0, 245, 255, 0.3);
-        }
-
-        .social-links {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 12px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
-
-        .social-links span {
-            color: #00f5ff;
-            font-size: 1.2rem;
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #e0e7ff;
+        }
+        
+        .feature-card p {
+            color: #b0bec5;
+            line-height: 1.6;
+        }
+        
+        /* Tokenomics */
+        .tokenomics {
+            padding: 5rem 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .tokenomics-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .token-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: #b0bec5;
+        }
+        
+        .detail-value {
+            color: #64ffda;
+            font-weight: 600;
+        }
+        
+        .contract-address {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            word-break: break-all;
+            color: #64ffda;
+            margin-top: 1rem;
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #667eea;
+            border: none;
+            color: white;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 0.8rem;
         }
-
-        .social-links span:hover {
-            transform: translateY(-3px);
-            text-shadow: 0 5px 15px rgba(0, 245, 255, 0.5);
+        
+        /* Governance */
+        .governance {
+            padding: 5rem 0;
         }
-
+        
+        .governance-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .governance-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            text-align: center;
+        }
+        
+        .governance-card h4 {
+            color: #64ffda;
+            margin-bottom: 0.5rem;
+        }
+        
+        .governance-card p {
+            color: #b0bec5;
+            font-size: 0.9rem;
+        }
+        
+        /* Documentation */
+        .documentation {
+            padding: 5rem 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .doc-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-5px);
+            border-color: #64ffda;
+        }
+        
+        .doc-card i {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .doc-card h4 {
+            color: #e0e7ff;
+            margin-bottom: 1rem;
+        }
+        
+        .doc-card p {
+            color: #b0bec5;
+            margin-bottom: 1.5rem;
+        }
+        
+        .doc-card a {
+            color: #64ffda;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #64ffda;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            color: #b0bec5;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #64ffda;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0bec5;
+        }
+        
+        /* Mobile */
         @media (max-width: 768px) {
-            h1 {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
                 font-size: 2.5rem;
             }
-
-            .btn-group {
+            
+            .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-
-            button {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .stats-grid,
-            .tokenomics-grid,
-            .features-grid {
+            
+            .tokenomics-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .token-info {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">QNX</div>
-            <h1>Qionex</h1>
-            <p class="tagline">Quantum-Level Security Token on Polygon Network</p>
-            
-            <div class="quantum-badge">
-                🔒 Quantum-Protected Transactions
-            </div>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Qionex</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#governance">Governance</a></li>
+                <li><a href="#docs">Documentation</a></li>
+            </ul>
+            <button class="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
+        </nav>
+    </header>
 
-            <div class="wallet-status" id="walletStatus">
-                <div id="connectionStatus">Connect your wallet to access quantum features</div>
-                <div class="wallet-address" id="walletAddress"></div>
-            </div>
-
-            <div class="qrng-display">
-                <div>🎲 Quantum Random Number Generator</div>
-                <div class="qrng-number" id="qrngNumber">Loading...</div>
-            </div>
-
-            <div class="btn-group">
-                <button id="connectWallet">🦊 Connect MetaMask</button>
-                <button id="addMetaMask">➕ Add QNX to MetaMask</button>
-                <button id="viewWhitepaper">📄 Whitepaper</button>
-            </div>
-
-            <div id="statusMessage" class="status-message"></div>
-        </header>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">256</div>
-                <div class="stat-label">Quantum Security Level</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="transactionCount">0</div>
-                <div class="stat-label">Protected Transactions</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">Network Stability</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">99.9%</div>
-                <div class="stat-label">Quantum Resistance</div>
-            </div>
-        </div>
-
-        <section class="tokenomics">
-            <h2>Tokenomics</h2>
-            
-            <div class="tokenomics-grid">
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Qionex (QNX)</h1>
+                <p class="subtitle">Advanced ERC-20 token with multi-signature governance, trading controls, and sophisticated fee management system built for modern DeFi applications.</p>
+                
                 <div class="token-info">
-                    <h3>Token Information</h3>
-                    <div class="info-row">
-                        <span>Name:</span>
-                        <span><strong>Qionex</strong></span>
+                    <div class="token-stat">
+                        <h3>1B</h3>
+                        <p>Total Supply</p>
                     </div>
-                    <div class="info-row">
-                        <span>Symbol:</span>
-                        <span><strong>QNX</strong></span>
+                    <div class="token-stat">
+                        <h3>QNX</h3>
+                        <p>Symbol</p>
                     </div>
-                    <div class="info-row">
-                        <span>Network:</span>
-                        <span><strong>Polygon</strong></span>
+                    <div class="token-stat">
+                        <h3>18</h3>
+                        <p>Decimals</p>
                     </div>
-                    <div class="info-row">
-                        <span>Type:</span>
-                        <span><strong>Quantum-Protected</strong></span>
+                    <div class="token-stat">
+                        <h3>ERC-20</h3>
+                        <p>Standard</p>
                     </div>
                 </div>
-
-                <div class="token-info">
-                    <h3>Supply & Fees</h3>
-                    <div class="info-row">
-                        <span>Total Supply:</span>
-                        <span><strong>1,000,000,000 QNX</strong></span>
-                    </div>
-                    <div class="info-row">
-                        <span>Buy Fee:</span>
-                        <span><strong>3%</strong></span>
-                    </div>
-                    <div class="info-row">
-                        <span>Sell Fee:</span>
-                        <span><strong>3%</strong></span>
-                    </div>
-                    <div class="info-row">
-                        <span>Quantum Security:</span>
-                        <span><strong>Active</strong></span>
-                    </div>
+                
+                <div class="hero-buttons">
+                    <a href="#tokenomics" class="btn btn-primary">
+                        <i class="fas fa-chart-pie"></i>
+                        View Tokenomics
+                    </a>
+                    <a href="#whitepaper" class="btn btn-secondary">
+                        <i class="fas fa-file-alt"></i>
+                        Whitepaper
+                    </a>
                 </div>
-            </div>
-
-            <div class="contract-address">
-                <strong>Contract Address:</strong><br>
-                <a href="https://polygonscan.com/address/0x5B38Da6a701c568545dCfcB03FcB875f56beddC4" target="_blank">
-                    0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-                </a>
             </div>
         </section>
 
-        <section class="features">
-            <h2>Quantum Features</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Post-Quantum Cryptography</h3>
-                    <p>Protected against future quantum computer attacks</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎲</div>
-                    <h3>Quantum Random Generation</h3>
-                    <p>True randomness powered by quantum mechanics</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Polygon network ensures ultra-fast transactions</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Future-Proof</h3>
-                    <p>Designed to remain secure against quantum computers</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💎</div>
-                    <h3>Quantum Entanglement</h3>
-                    <p>Advanced quantum principles for maximum security</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Next-Gen Technology</h3>
-                    <p>First quantum-secured token on Polygon</p>
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Advanced Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3>Multi-Signature Governance</h3>
+                        <p>Decentralized governance system with multiple governors for enhanced security and democratic decision-making.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Advanced Security</h3>
+                        <p>Built-in blacklist functionality, emergency pause mechanism, and comprehensive access control systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Trading Controls</h3>
+                        <p>Sophisticated trading limits, configurable fees, and liquidity pool management for optimal market stability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Token Burning</h3>
+                        <p>Deflationary mechanism allowing token holders to burn tokens, reducing total supply and increasing scarcity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3>Batch Transfers</h3>
+                        <p>Efficient batch transfer functionality for authorized addresses, reducing gas costs for bulk operations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Configurable Parameters</h3>
+                        <p>Dynamic fee adjustment, transaction limits, and wallet limits that can be modified through governance.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </div>
+
+        <section id="tokenomics" class="tokenomics">
+            <div class="container">
+                <h2 class="section-title">Tokenomics</h2>
+                <div class="tokenomics-content">
+                    <div class="token-details">
+                        <h3 style="color: #64ffda; margin-bottom: 1.5rem;">Token Details</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Token Name:</span>
+                            <span class="detail-value">Qionex</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Symbol:</span>
+                            <span class="detail-value">QNX</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Total Supply:</span>
+                            <span class="detail-value">1,000,000,000 QNX</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Decimals:</span>
+                            <span class="detail-value">18</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Max Buy Fee:</span>
+                            <span class="detail-value">5% (500 basis points)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Max Sell Fee:</span>
+                            <span class="detail-value">5% (500 basis points)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Initial Max Transaction:</span>
+                            <span class="detail-value">2% of total supply</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Initial Max Wallet:</span>
+                            <span class="detail-value">2% of total supply</span>
+                        </div>
+                    </div>
+                    <div class="token-details">
+                        <h3 style="color: #64ffda; margin-bottom: 1.5rem;">Contract Address</h3>
+                        <p style="color: #b0bec5; margin-bottom: 1rem;">Deploy on Polygon or Ethereum network:</p>
+                        <div class="contract-address">
+                            0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+                            <button class="copy-btn" onclick="copyAddress()">Copy</button>
+                        </div>
+                        <p style="color: #b0bec5; font-size: 0.9rem; margin-top: 1rem;">
+                            <i class="fas fa-info-circle"></i> 
+                            Always verify the contract address before any transactions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="governance" class="governance">
+            <div class="container">
+                <h2 class="section-title">Governance System</h2>
+                <p style="text-align: center; color: #b0bec5; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Qionex features a sophisticated multi-signature governance system ensuring decentralized and secure protocol management.
+                </p>
+                <div class="governance-features">
+                    <div class="governance-card">
+                        <h4>Governor Management</h4>
+                        <p>Add or remove governors through consensus, maintaining 3-9 governor limit for optimal security.</p>
+                    </div>
+                    <div class="governance-card">
+                        <h4>Trading Controls</h4>
+                        <p>Enable/disable trading, update fees, and modify transaction limits through governance votes.</p>
+                    </div>
+                    <div class="governance-card">
+                        <h4>Blacklist Management</h4>
+                        <p>Maintain protocol security by managing blacklisted addresses through governor consensus.</p>
+                    </div>
+                    <div class="governance-card">
+                        <h4>Emergency Functions</h4>
+                        <p>Emergency pause functionality for immediate threat response while maintaining decentralization.</p>
+                    </div>
+                    <div class="governance-card">
+                        <h4>Liquidity Pool Management</h4>
+                        <p>Configure liquidity pools and manage automated market maker integrations.</p>
+                    </div>
+                    <div class="governance-card">
+                        <h4>Authorization System</h4>
+                        <p>Granular permission system for different levels of access and operational capabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="docs" class="documentation">
+            <div class="container">
+                <h2 class="section-title">Documentation</h2>
+                <div class="docs-grid">
+                    <div class="doc-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Whitepaper</h4>
+                        <p>Complete technical documentation and tokenomics overview.</p>
+                        <a href="#whitepaper">Read Whitepaper →</a>
+                    </div>
+                    <div class="doc-card">
+                        <i class="fas fa-code"></i>
+                        <h4>Smart Contract</h4>
+                        <p>View the complete source code and technical implementation.</p>
+                        <a href="https://github.com/Husyn66/Qionex" target="_blank">View on GitHub →</a>
+                    </div>
+                    <div class="doc-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Security Audit</h4>
+                        <p>Third-party security audit report and vulnerability assessment.</p>
+                        <a href="#audit">View Audit →</a>
+                    </div>
+                    <div class="doc-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Developer Guide</h4>
+                        <p>Integration guide for developers and technical documentation.</p>
+                        <a href="#dev-docs">Developer Docs →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <div class="social-links">
-            <span onclick="showStatus('Twitter coming soon!', 'info')">🐦 Twitter</span>
-            <span onclick="showStatus('Telegram coming soon!', 'info')">💬 Telegram</span>
-            <span onclick="showStatus('Discord coming soon!', 'info')">🎮 Discord</span>
-            <span onclick="showStatus('GitHub coming soon!', 'info')">⚡ GitHub</span>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Qionex Protocol</h4>
+                    <p style="color: #b0bec5;">Advanced ERC-20 token with governance and security features for modern DeFi applications.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#whitepaper">Whitepaper</a>
+                    <a href="https://github.com/Husyn66/Qionex" target="_blank">GitHub</a>
+                    <a href="#audit">Security Audit</a>
+                    <a href="#docs">Documentation</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <a href="#">Discord</a>
+                    <a href="#">Telegram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Medium</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Qionex Protocol. Built on Ethereum/Polygon.</p>
+            </div>
         </div>
-        <p>&copy; 2025 Qionex. All rights reserved. | Quantum-Secured Technology</p>
     </footer>
 
     <script>
-        // Variables
-        let walletConnected = false;
-        let userAccount = null;
-
-        // Show status function
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('statusMessage');
-            statusDiv.className = 'status-message status-' + type;
-            statusDiv.textContent = message;
-            statusDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        // Update QRNG
-        function updateQRNG() {
-            const qrngDisplay = document.getElementById('qrngNumber');
-            
-            function generateNumber() {
-                const number = Math.floor(Math.random() * 999999999).toString().padStart(9, '0');
-                qrngDisplay.textContent = number.match(/.{1,3}/g).join(' ');
-            }
-            
-            generateNumber();
-            setInterval(generateNumber, 2000);
-        }
-
-        // Connect wallet
         async function connectWallet() {
-            const connectBtn = document.getElementById('connectWallet');
-            const walletStatus = document.getElementById('walletStatus');
-            const connectionStatus = document.getElementById('connectionStatus');
-            const walletAddress = document.getElementById('walletAddress');
-
-            try {
-                if (typeof window.ethereum !== 'undefined') {
-                    connectBtn.textContent = 'Connecting...';
-                    connectBtn.disabled = true;
-                    
-                    const accounts = await window.ethereum.request({
-                        method: 'eth_requestAccounts'
-                    });
-                    
-                    if (accounts && accounts.length > 0) {
-                        userAccount = accounts[0];
-                        walletConnected = true;
-                        
-                        connectBtn.textContent = '✅ Wallet Connected';
-                        connectionStatus.textContent = 'Quantum Wallet Connected';
-                        walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
-                        walletStatus.classList.add('wallet-connected');
-                        
-                        showStatus('Wallet connected successfully!', 'success');
-                        updateTransactionCount();
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                    if (accounts.length > 0) {
+                        document.querySelector('.connect-wallet').textContent = 
+                            accounts[0].substring(0, 6) + '...' + accounts[0].substring(38);
+                        showNotification('Wallet connected successfully!', 'success');
                     }
-                } else {
-                    showStatus('MetaMask not detected. Please install MetaMask.', 'error');
-                    connectBtn.disabled = false;
-                    connectBtn.textContent = '🦊 Connect MetaMask';
+                } catch (error) {
+                    showNotification('Failed to connect wallet', 'error');
                 }
-            } catch (error) {
-                console.error('Connection failed:', error);
-                connectBtn.textContent = '🦊 Connect MetaMask';
-                connectBtn.disabled = false;
-                showStatus('Connection failed. Please try again.', 'error');
+            } else {
+                showNotification('Please install MetaMask!', 'warning');
+                window.open('https://metamask.io/', '_blank');
             }
         }
 
-        // Add token to MetaMask
-        async function addTokenToMetaMask() {
-            const addBtn = document.getElementById('addMetaMask');
+        function copyAddress() {
+            const address = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
+            navigator.clipboard.writeText(address).then(() => {
+                showNotification('Contract address copied!', 'success');
+            });
+        }
 
-            try {
-                if (typeof window.ethereum !== 'undefined') {
-                    addBtn.textContent = 'Adding...';
-                    addBtn.disabled = true;
-                    
-                    const wasAdded = await window.ethereum.request({
-                        method: 'wallet_watchAsset',
-                        params: {
-                            type: 'ERC20',
-                            options: {
-                                address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
-                                symbol: 'QNX',
-                                decimals: 18
-                            }
-                        }
-                    });
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? '#64ffda' : type === 'error' ? '#ff5252' : '#ffb74d'};
+                color: #000;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
 
-                    if (wasAdded) {
-                        addBtn.textContent = '✅ QNX Added';
-                        showStatus('QNX token added to MetaMask!', 'success');
-                    } else {
-                        addBtn.textContent = '➕ Add QNX to MetaMask';
-                        addBtn.disabled = false;
-                        showStatus('Token addition cancelled.', 'info');
-                    }
-                } else {
-                    showStatus('MetaMask not detected.', 'error');
-                    addBtn.disabled = false;
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            } catch (error) {
-                console.error('Error adding token:', error);
-                addBtn.textContent = '➕ Add QNX to MetaMask';
-                addBtn.disabled = false;
-                showStatus('Failed to add token.', 'error');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.3)';
             }
-        }
-
-        // Update transaction count
-        function updateTransactionCount() {
-            const counter = document.getElementById('transactionCount');
-            let count = 0;
-            
-            const interval = setInterval(() => {
-                count += Math.floor(Math.random() * 10) + 1;
-                counter.textContent = count.toLocaleString();
-                if (count > 1000) {
-                    clearInterval(interval);
-                }
-            }, 500);
-        }
-
-        // Open whitepaper
-        function openWhitepaper() {
-            showStatus('Whitepaper will be available soon!', 'info');
-        }
-
-        // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded, initializing...');
-            
-            // Start QRNG
-            updateQRNG();
-            
-            // Add button listeners
-            document.getElementById('connectWallet').addEventListener('click', connectWallet);
-            document.getElementById('addMetaMask').addEventListener('click', addTokenToMetaMask);
-            document.getElementById('viewWhitepaper').addEventListener('click', openWhitepaper);
-            
-            console.log('All listeners added');
         });
     </script>
 </body>
