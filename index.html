@@ -6,143 +6,15 @@
     <title>Qionex (QNX) - Advanced ERC-20 Token with Governance</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #fff;
             background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #64ffda;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: #e0e7ff;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-        
-        .nav-links a:hover {
-            color: #64ffda;
-        }
-        
-        .connect-wallet {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .connect-wallet:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* Hero */
-        .hero {
-            padding: 8rem 0 4rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #64ffda, #667eea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: #b0bec5;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .token-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
-        
-        .token-stat {
-            text-align: center;
-        }
-        
-        .token-stat h3 {
-            font-size: 2rem;
-            color: #64ffda;
-            margin-bottom: 0.5rem;
-        }
-        
-        .token-stat p {
-            color: #b0bec5;
-            font-weight: 500;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
         .btn {
             padding: 1rem 2rem;
             border-radius: 8px;
@@ -154,286 +26,21 @@
             gap: 0.5rem;
             font-size: 1.1rem;
         }
-        
         .btn-primary {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
         }
-        
         .btn-secondary {
             background: transparent;
             color: #64ffda;
             border: 2px solid #64ffda;
         }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Features */
-        .features {
-            padding: 5rem 0;
-        }
-        
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 3rem;
             color: #e0e7ff;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-            transition: all 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: #64ffda;
-            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-icon i {
-            font-size: 1.5rem;
-            color: white;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: #e0e7ff;
-        }
-        
-        .feature-card p {
-            color: #b0bec5;
-            line-height: 1.6;
-        }
-        
-        /* Tokenomics */
-        .tokenomics {
-            padding: 5rem 0;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .tokenomics-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .token-details {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
-        
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-        
-        .detail-label {
-            color: #b0bec5;
-        }
-        
-        .detail-value {
-            color: #64ffda;
-            font-weight: 600;
-        }
-        
-        .contract-address {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: monospace;
-            word-break: break-all;
-            color: #64ffda;
-            margin-top: 1rem;
-            position: relative;
-        }
-        
-        .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: #667eea;
-            border: none;
-            color: white;
-            padding: 0.3rem 0.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        
-        /* Governance */
-        .governance {
-            padding: 5rem 0;
-        }
-        
-        .governance-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .governance-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-            text-align: center;
-        }
-        
-        .governance-card h4 {
-            color: #64ffda;
-            margin-bottom: 0.5rem;
-        }
-        
-        .governance-card p {
-            color: #b0bec5;
-            font-size: 0.9rem;
-        }
-        
-        /* Documentation */
-        .documentation {
-            padding: 5rem 0;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .docs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .doc-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .doc-card:hover {
-            transform: translateY(-5px);
-            border-color: #64ffda;
-        }
-        
-        .doc-card i {
-            font-size: 2.5rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-        
-        .doc-card h4 {
-            color: #e0e7ff;
-            margin-bottom: 1rem;
-        }
-        
-        .doc-card p {
-            color: #b0bec5;
-            margin-bottom: 1.5rem;
-        }
-        
-        .doc-card a {
-            color: #64ffda;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 3rem 0 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section h4 {
-            color: #64ffda;
-            margin-bottom: 1rem;
-        }
-        
-        .footer-section a {
-            color: #b0bec5;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s;
-        }
-        
-        .footer-section a:hover {
-            color: #64ffda;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #b0bec5;
-        }
-        
-        /* Mobile */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .tokenomics-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .token-info {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
     </style>
 </head>
@@ -452,211 +59,38 @@
     </header>
 
     <main>
-        <section class="hero">
+        <section id="whitepaper" class="documentation">
             <div class="container">
-                <h1>Qionex (QNX)</h1>
-                <p class="subtitle">Advanced ERC-20 token with multi-signature governance, trading controls, and sophisticated fee management system built for modern DeFi applications.</p>
-                
-                <div class="token-info">
-                    <div class="token-stat">
-                        <h3>1B</h3>
-                        <p>Total Supply</p>
-                    </div>
-                    <div class="token-stat">
-                        <h3>QNX</h3>
-                        <p>Symbol</p>
-                    </div>
-                    <div class="token-stat">
-                        <h3>18</h3>
-                        <p>Decimals</p>
-                    </div>
-                    <div class="token-stat">
-                        <h3>ERC-20</h3>
-                        <p>Standard</p>
-                    </div>
-                </div>
-                
-                <div class="hero-buttons">
-                    <a href="#tokenomics" class="btn btn-primary">
-                        <i class="fas fa-chart-pie"></i>
-                        View Tokenomics
-                    </a>
-                    <a href="#whitepaper" class="btn btn-secondary">
-                        <i class="fas fa-file-alt"></i>
-                        Whitepaper
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="features">
-            <div class="container">
-                <h2 class="section-title">Advanced Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <h3>Multi-Signature Governance</h3>
-                        <p>Decentralized governance system with multiple governors for enhanced security and democratic decision-making.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Advanced Security</h3>
-                        <p>Built-in blacklist functionality, emergency pause mechanism, and comprehensive access control systems.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <h3>Trading Controls</h3>
-                        <p>Sophisticated trading limits, configurable fees, and liquidity pool management for optimal market stability.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h3>Token Burning</h3>
-                        <p>Deflationary mechanism allowing token holders to burn tokens, reducing total supply and increasing scarcity.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </div>
-                        <h3>Batch Transfers</h3>
-                        <p>Efficient batch transfer functionality for authorized addresses, reducing gas costs for bulk operations.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3>Configurable Parameters</h3>
-                        <p>Dynamic fee adjustment, transaction limits, and wallet limits that can be modified through governance.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="tokenomics" class="tokenomics">
-            <div class="container">
-                <h2 class="section-title">Tokenomics</h2>
-                <div class="tokenomics-content">
-                    <div class="token-details">
-                        <h3 style="color: #64ffda; margin-bottom: 1.5rem;">Token Details</h3>
-                        <div class="detail-item">
-                            <span class="detail-label">Token Name:</span>
-                            <span class="detail-value">Qionex</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Symbol:</span>
-                            <span class="detail-value">QNX</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Total Supply:</span>
-                            <span class="detail-value">1,000,000,000 QNX</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Decimals:</span>
-                            <span class="detail-value">18</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Max Buy Fee:</span>
-                            <span class="detail-value">5% (500 basis points)</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Max Sell Fee:</span>
-                            <span class="detail-value">5% (500 basis points)</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Initial Max Transaction:</span>
-                            <span class="detail-value">2% of total supply</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Initial Max Wallet:</span>
-                            <span class="detail-value">2% of total supply</span>
-                        </div>
-                    </div>
-                    <div class="token-details">
-                        <h3 style="color: #64ffda; margin-bottom: 1.5rem;">Contract Address</h3>
-                        <p style="color: #b0bec5; margin-bottom: 1rem;">Deploy on Polygon or Ethereum network:</p>
-                        <div class="contract-address">
-                            0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-                            <button class="copy-btn" onclick="copyAddress()">Copy</button>
-                        </div>
-                        <p style="color: #b0bec5; font-size: 0.9rem; margin-top: 1rem;">
-                            <i class="fas fa-info-circle"></i> 
-                            Always verify the contract address before any transactions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="governance" class="governance">
-            <div class="container">
-                <h2 class="section-title">Governance System</h2>
-                <p style="text-align: center; color: #b0bec5; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Qionex features a sophisticated multi-signature governance system ensuring decentralized and secure protocol management.
+                <h2 class="section-title">Whitepaper</h2>
+                <p style="text-align: center; color: #b0bec5; max-width: 700px; margin: 0 auto;">
+                    Access the comprehensive whitepaper to understand Qionex’s purpose, structure, and governance protocols.
                 </p>
-                <div class="governance-features">
-                    <div class="governance-card">
-                        <h4>Governor Management</h4>
-                        <p>Add or remove governors through consensus, maintaining 3-9 governor limit for optimal security.</p>
-                    </div>
-                    <div class="governance-card">
-                        <h4>Trading Controls</h4>
-                        <p>Enable/disable trading, update fees, and modify transaction limits through governance votes.</p>
-                    </div>
-                    <div class="governance-card">
-                        <h4>Blacklist Management</h4>
-                        <p>Maintain protocol security by managing blacklisted addresses through governor consensus.</p>
-                    </div>
-                    <div class="governance-card">
-                        <h4>Emergency Functions</h4>
-                        <p>Emergency pause functionality for immediate threat response while maintaining decentralization.</p>
-                    </div>
-                    <div class="governance-card">
-                        <h4>Liquidity Pool Management</h4>
-                        <p>Configure liquidity pools and manage automated market maker integrations.</p>
-                    </div>
-                    <div class="governance-card">
-                        <h4>Authorization System</h4>
-                        <p>Granular permission system for different levels of access and operational capabilities.</p>
-                    </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="whitepaper.pdf" target="_blank" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download PDF</a>
                 </div>
             </div>
         </section>
 
-        <section id="docs" class="documentation">
+        <section id="audit" class="documentation">
             <div class="container">
-                <h2 class="section-title">Documentation</h2>
-                <div class="docs-grid">
-                    <div class="doc-card">
-                        <i class="fas fa-file-alt"></i>
-                        <h4>Whitepaper</h4>
-                        <p>Complete technical documentation and tokenomics overview.</p>
-                        <a href="#whitepaper">Read Whitepaper →</a>
-                    </div>
-                    <div class="doc-card">
-                        <i class="fas fa-code"></i>
-                        <h4>Smart Contract</h4>
-                        <p>View the complete source code and technical implementation.</p>
-                        <a href="https://github.com/Husyn66/Qionex" target="_blank">View on GitHub →</a>
-                    </div>
-                    <div class="doc-card">
-                        <i class="fas fa-shield-alt"></i>
-                        <h4>Security Audit</h4>
-                        <p>Third-party security audit report and vulnerability assessment.</p>
-                        <a href="#audit">View Audit →</a>
-                    </div>
-                    <div class="doc-card">
-                        <i class="fas fa-book"></i>
-                        <h4>Developer Guide</h4>
-                        <p>Integration guide for developers and technical documentation.</p>
-                        <a href="#dev-docs">Developer Docs →</a>
-                    </div>
+                <h2 class="section-title">Security Audit</h2>
+                <p style="text-align: center; color: #b0bec5; max-width: 700px; margin: 0 auto;">
+                    Review our third-party smart contract audit report to ensure the safety of our ecosystem.
+                </p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="audit-report.pdf" target="_blank" class="btn btn-secondary"><i class="fas fa-shield-alt"></i> View Audit Report</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="dev-docs" class="documentation">
+            <div class="container">
+                <h2 class="section-title">Developer Documentation</h2>
+                <p style="text-align: center; color: #b0bec5; max-width: 700px; margin: 0 auto;">
+                    Technical resources and API integration guides for developers building on Qionex.
+                </p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="dev-docs.html" target="_blank" class="btn btn-primary"><i class="fas fa-code"></i> View Developer Docs</a>
                 </div>
             </div>
         </section>
@@ -664,52 +98,47 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Qionex Protocol</h4>
-                    <p style="color: #b0bec5;">Advanced ERC-20 token with governance and security features for modern DeFi applications.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="#whitepaper">Whitepaper</a>
-                    <a href="https://github.com/Husyn66/Qionex" target="_blank">GitHub</a>
-                    <a href="#audit">Security Audit</a>
-                    <a href="#docs">Documentation</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Community</h4>
-                    <a href="#">Discord</a>
-                    <a href="#">Telegram</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Medium</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Disclaimer</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Qionex Protocol. Built on Ethereum/Polygon.</p>
-            </div>
+            <p style="text-align: center; color: #b0bec5; padding: 2rem 0;">
+                &copy; 2025 Qionex Protocol. Built on Ethereum/Polygon.
+            </p>
         </div>
     </footer>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.3)';
+            }
+        });
+
         function connectWallet() {
             if (typeof window.ethereum !== 'undefined') {
                 window.ethereum.request({ method: 'eth_requestAccounts' })
-                .then((accounts) => {
-                    if (accounts.length > 0) {
-                        document.querySelector('.connect-wallet').textContent = 
-                            accounts[0].substring(0, 6) + '...' + accounts[0].substring(38);
-                        showNotification('Wallet connected successfully!', 'success');
-                    }
-                })
-                .catch((error) => {
-                    showNotification('Failed to connect wallet', 'error');
-                });
+                    .then((accounts) => {
+                        if (accounts.length > 0) {
+                            const display = accounts[0].substring(0, 6) + '...' + accounts[0].slice(-4);
+                            document.querySelector('.connect-wallet').textContent = display;
+                            showNotification('Wallet connected successfully!', 'success');
+                        }
+                    })
+                    .catch(() => {
+                        showNotification('Failed to connect wallet', 'error');
+                    });
             } else {
                 showNotification('Please install MetaMask!', 'warning');
                 window.open('https://metamask.io/', '_blank');
@@ -762,34 +191,13 @@
             `;
             notification.textContent = message;
             document.body.appendChild(notification);
-            
+
             setTimeout(() => notification.style.transform = 'translateX(0)', 100);
             setTimeout(() => {
                 notification.style.transform = 'translateX(100%)';
                 setTimeout(() => document.body.removeChild(notification), 300);
             }, 3000);
         }
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.5)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.3)';
-            }
-        });
     </script>
 </body>
 </html>
