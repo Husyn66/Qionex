@@ -1,901 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Qionex (QNX) - Quantum-Level Token on Polygon. Ultra-fast, ultra-low fees with quantum security.">
-  <title>Qionex (QNX) - Quantum Token</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qionex (QNX) - Quantum Token</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-      color: #ffffff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    .quantum-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #00f5ff;
-      border-radius: 50%;
-      animation: float 20s infinite linear;
-      box-shadow: 0 0 10px #00f5ff;
-    }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-    }
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid #00f5ff;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #00f5ff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
 
-    .lang-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-    }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 245, 255, 0.3); }
+            to { box-shadow: 0 0 40px rgba(0, 245, 255, 0.8); }
+        }
 
-    select {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid #00f5ff;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 25px;
-      outline: none;
-    }
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #00f5ff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
 
-    header {
-      text-align: center;
-      padding: 60px 20px;
-    }
+        .tagline {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+        }
 
-    .logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      border: 3px solid #00f5ff;
-      box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
-      animation: pulse 2s ease-in-out infinite alternate;
-      background: linear-gradient(45deg, #0a0a0a, #1a1a2e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 900;
-      color: #00f5ff;
-    }
+        .quantum-badge {
+            display: inline-block;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid #00f5ff;
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin: 20px 0;
+            color: #00f5ff;
+        }
 
-    @keyframes pulse {
-      from { box-shadow: 0 0 30px rgba(0, 245, 255, 0.5); }
-      to { box-shadow: 0 0 50px rgba(0, 245, 255, 0.8); }
-    }
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
 
-    h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      background: linear-gradient(45deg, #00f5ff, #ff6b35, #00f5ff);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradient 3s ease infinite;
-      margin-bottom: 15px;
-    }
+        button {
+            background: linear-gradient(45deg, #00f5ff, #0066cc);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            min-width: 180px;
+        }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.3);
+        }
 
-    #tagline {
-      font-size: 1.2rem;
-      color: #b0b0b0;
-      margin-bottom: 40px;
-      font-weight: 300;
-    }
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
 
-    .quantum-badge {
-      display: inline-block;
-      background: rgba(0, 245, 255, 0.1);
-      border: 1px solid #00f5ff;
-      border-radius: 50px;
-      padding: 10px 20px;
-      margin: 20px 0;
-      font-size: 0.9rem;
-      color: #00f5ff;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
+        .wallet-status {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px auto;
+            text-align: center;
+            max-width: 500px;
+        }
 
-    @keyframes glow {
-      from { box-shadow: 0 0 20px rgba(0, 245, 255, 0.3); }
-      to { box-shadow: 0 0 30px rgba(0, 245, 255, 0.6); }
-    }
+        .wallet-connected {
+            border-color: #00ff88;
+        }
 
-    .btn-group {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 30px 0;
-    }
+        .wallet-address {
+            font-family: 'Courier New', monospace;
+            color: #00f5ff;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
 
-    button {
-      background: linear-gradient(45deg, #00f5ff, #0066cc);
-      border: none;
-      padding: 15px 30px;
-      border-radius: 50px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-      min-width: 180px;
-    }
+        .qrng-display {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #00f5ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            text-align: center;
+            max-width: 400px;
+        }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 245, 255, 0.3);
-    }
+        .qrng-number {
+            font-size: 2rem;
+            font-family: 'Courier New', monospace;
+            color: #00f5ff;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
 
-    button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: none;
-    }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
 
-    .wallet-status {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 245, 255, 0.3);
-      border-radius: 20px;
-      padding: 30px;
-      margin: 30px auto;
-      text-align: center;
-      max-width: 500px;
-    }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
 
-    .wallet-connected {
-      border-color: #00ff88;
-    }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00f5ff;
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+        }
 
-    .wallet-address {
-      font-family: 'Courier New', monospace;
-      color: #00f5ff;
-      font-size: 0.9rem;
-      margin-top: 10px;
-    }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00f5ff;
+            margin-bottom: 10px;
+        }
 
-    .qrng-display {
-      background: rgba(0, 0, 0, 0.5);
-      border: 2px solid #00f5ff;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 30px auto;
-      text-align: center;
-      max-width: 400px;
-    }
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 1rem;
+        }
 
-    .qrng-number {
-      font-size: 2rem;
-      font-family: 'Courier New', monospace;
-      color: #00f5ff;
-      letter-spacing: 2px;
-      margin-top: 10px;
-    }
+        .tokenomics {
+            margin: 80px 0;
+            text-align: center;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        .tokenomics h2 {
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: #00f5ff;
+        }
 
-    .quantum-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin: 60px 0;
-    }
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
 
-    .stat-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 245, 255, 0.3);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
+        .token-info {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
 
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: #00f5ff;
-      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
-    }
+        .token-info:hover {
+            transform: translateY(-5px);
+            border-color: #00f5ff;
+        }
 
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #00f5ff;
-      margin-bottom: 10px;
-    }
+        .token-info h3 {
+            color: #00f5ff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
 
-    .stat-label {
-      color: #b0b0b0;
-      font-size: 1rem;
-    }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    #tokenomics {
-      margin: 80px 0;
-      text-align: center;
-    }
+        .info-row:last-child {
+            border-bottom: none;
+        }
 
-    #tokenomics h2 {
-      font-size: 3rem;
-      margin-bottom: 50px;
-      color: #00f5ff;
-    }
+        .contract-address {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+        }
 
-    .tokenomics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-    }
+        .contract-address a {
+            color: #00f5ff;
+            text-decoration: none;
+            word-break: break-all;
+        }
 
-    .token-info {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 245, 255, 0.3);
-      border-radius: 20px;
-      padding: 40px;
-      transition: all 0.3s ease;
-    }
+        .features {
+            margin: 80px 0;
+        }
 
-    .token-info:hover {
-      transform: translateY(-5px);
-      border-color: #00f5ff;
-    }
+        .features h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #00f5ff;
+        }
 
-    .token-info h3 {
-      color: #00f5ff;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-    }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      margin: 15px 0;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
 
-    .info-row:last-child {
-      border-bottom: none;
-    }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00f5ff;
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+        }
 
-    .contract-address {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 20px;
-      border-radius: 15px;
-      margin: 30px 0;
-      font-family: 'Courier New', monospace;
-    }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
 
-    .contract-address a {
-      color: #00f5ff;
-      text-decoration: none;
-      word-break: break-all;
-    }
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 500px;
+            display: none;
+        }
 
-    .contract-address a:hover {
-      text-decoration: underline;
-    }
+        .status-success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+        }
 
-    .quantum-features {
-      margin: 80px 0;
-    }
+        .status-error {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+        }
 
-    .quantum-features h2 {
-      font-size: 3rem;
-      text-align: center;
-      margin-bottom: 50px;
-      color: #00f5ff;
-    }
+        .status-info {
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid #00f5ff;
+            color: #00f5ff;
+        }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(0, 245, 255, 0.3);
+        }
 
-    .feature-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 245, 255, 0.3);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: #00f5ff;
-      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
-    }
+        .social-links span {
+            color: #00f5ff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: #00f5ff;
-    }
+        .social-links span:hover {
+            transform: translateY(-3px);
+            text-shadow: 0 5px 15px rgba(0, 245, 255, 0.5);
+        }
 
-    footer {
-      text-align: center;
-      padding: 60px 20px 40px;
-      margin-top: 100px;
-      border-top: 1px solid rgba(0, 245, 255, 0.3);
-    }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
 
-    .social-links a {
-      color: #00f5ff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
+            button {
+                width: 100%;
+                max-width: 300px;
+            }
 
-    .social-links a:hover {
-      transform: translateY(-3px);
-      text-shadow: 0 5px 15px rgba(0, 245, 255, 0.5);
-    }
-
-    .status-message {
-      padding: 15px;
-      border-radius: 10px;
-      margin: 20px auto;
-      text-align: center;
-      max-width: 500px;
-    }
-
-    .status-success {
-      background: rgba(0, 255, 136, 0.1);
-      border: 1px solid #00ff88;
-      color: #00ff88;
-    }
-
-    .status-error {
-      background: rgba(255, 107, 53, 0.1);
-      border: 1px solid #ff6b35;
-      color: #ff6b35;
-    }
-
-    .status-info {
-      background: rgba(0, 245, 255, 0.1);
-      border: 1px solid #00f5ff;
-      color: #00f5ff;
-    }
-
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(0, 245, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #00f5ff;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .btn-group {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      button {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .quantum-stats,
-      .tokenomics-grid,
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .social-links {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .lang-switcher {
-        position: static;
-        margin-bottom: 20px;
-        text-align: center;
-      }
-    }
-  </style>
+            .stats-grid,
+            .tokenomics-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="quantum-bg" id="quantumBg"></div>
-
-  <div class="lang-switcher">
-    <select id="language">
-      <option value="en">English</option>
-      <option value="zh">中文</option>
-      <option value="es">Español</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-    </select>
-  </div>
-
-  <header>
-    <div class="logo">QNX</div>
-    <h1>Qionex</h1>
-    <p id="tagline">Quantum-Level Security Token on Polygon Network</p>
-    
-    <div class="quantum-badge">
-      🔒 Quantum-Protected Transactions
-    </div>
-
-    <div class="wallet-status" id="walletStatus">
-      <div id="connectionStatus">Connect your wallet to access quantum features</div>
-      <div class="wallet-address" id="walletAddress"></div>
-    </div>
-
-    <div class="qrng-display">
-      <div>🎲 Quantum Random Number Generator</div>
-      <div class="qrng-number" id="qrngNumber">Loading...</div>
-    </div>
-
-    <div class="btn-group">
-      <button id="connectWallet">🦊 Connect MetaMask</button>
-      <button id="addMetaMask">➕ Add QNX to MetaMask</button>
-      <button id="viewWhitepaper">📄 Whitepaper</button>
-    </div>
-
-    <div id="statusMessage"></div>
-  </header>
-
-  <div class="container">
-    <div class="quantum-stats">
-      <div class="stat-card">
-        <div class="stat-number" id="quantumSecurity">256</div>
-        <div class="stat-label">Quantum Security Level</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" id="transactionCount">0</div>
-        <div class="stat-label">Protected Transactions</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" id="networkNodes">∞</div>
-        <div class="stat-label">Network Stability</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" id="quantumResistance">99.9%</div>
-        <div class="stat-label">Quantum Resistance</div>
-      </div>
-    </div>
-
-    <section id="tokenomics">
-      <h2>Tokenomics</h2>
-      
-      <div class="tokenomics-grid">
-        <div class="token-info">
-          <h3>Token Information</h3>
-          <div class="info-row">
-            <span>Name:</span>
-            <span><strong>Qionex</strong></span>
-          </div>
-          <div class="info-row">
-            <span>Symbol:</span>
-            <span><strong>QNX</strong></span>
-          </div>
-          <div class="info-row">
-            <span>Network:</span>
-            <span><strong>Polygon</strong></span>
-          </div>
-          <div class="info-row">
-            <span>Type:</span>
-            <span><strong>Quantum-Protected</strong></span>
-          </div>
-        </div>
-
-        <div class="token-info">
-          <h3>Supply & Fees</h3>
-          <div class="info-row">
-            <span>Total Supply:</span>
-            <span><strong>1,000,000,000 QNX</strong></span>
-          </div>
-          <div class="info-row">
-            <span>Buy Fee:</span>
-            <span><strong>3%</strong></span>
-          </div>
-          <div class="info-row">
-            <span>Sell Fee:</span>
-            <span><strong>3%</strong></span>
-          </div>
-          <div class="info-row">
-            <span>Quantum Security:</span>
-            <span><strong>Active</strong></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="contract-address">
-        <strong>Contract Address:</strong><br>
-        <a href="https://polygonscan.com/address/0x5B38Da6a701c568545dCfcB03FcB875f56beddC4" target="_blank" rel="noopener">
-          0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-        </a>
-      </div>
-    </section>
-
-    <section class="quantum-features">
-      <h2>Quantum Features</h2>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🔐</div>
-          <h3>Post-Quantum Cryptography</h3>
-          <p>Protected against future quantum computer attacks using advanced mathematical algorithms</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🎲</div>
-          <h3>Quantum Random Generation</h3>
-          <p>True randomness powered by quantum mechanics for unbreakable security</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Lightning Fast</h3>
-          <p>Polygon network ensures ultra-fast transactions with minimal fees</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🌐</div>
-          <h3>Future-Proof</h3>
-          <p>Designed to remain secure even against tomorrow's quantum computers</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">💎</div>
-          <h3>Quantum Entanglement</h3>
-          <p>Advanced quantum principles ensure maximum security for all transactions</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-          <h3>Next-Gen Technology</h3>
-          <p>First quantum-secured token on Polygon with revolutionary features</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <div class="social-links">
-      <a onclick="showStatus('Twitter coming soon!', 'info')">🐦 Twitter</a>
-      <a onclick="showStatus('Telegram coming soon!', 'info')">💬 Telegram</a>
-      <a onclick="showStatus('Discord coming soon!', 'info')">🎮 Discord</a>
-      <a onclick="showStatus('GitHub coming soon!', 'info')">⚡ GitHub</a>
-    </div>
-    <p>&copy; 2025 Qionex. All rights reserved. | Quantum-Secured Technology</p>
-  </footer>
-
-  <script>
-    // Global variables
-    let walletConnected = false;
-    let userAccount = null;
-    let transactionInterval = null;
-
-    // Create quantum particles
-    function createQuantumParticles() {
-      const bg = document.getElementById('quantumBg');
-      if (!bg) return;
-      
-      const particleCount = 30;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-        bg.appendChild(particle);
-      }
-    }
-
-    // Update QRNG
-    function updateQRNG() {
-      const qrngDisplay = document.getElementById('qrngNumber');
-      if (!qrngDisplay) return;
-      
-      setInterval(() => {
-        const quantumNumber = Math.floor(Math.random() * 999999999).toString().padStart(9, '0');
-        qrngDisplay.textContent = quantumNumber.match(/.{1,3}/g).join(' ');
-      }, 2000);
-    }
-
-    // Show status messages
-    function showStatus(message, type) {
-      const statusDiv = document.getElementById('statusMessage');
-      if (!statusDiv) return;
-      
-      statusDiv.className = 'status-message status-' + type;
-      statusDiv.textContent = message;
-      
-      setTimeout(() => {
-        statusDiv.textContent = '';
-        statusDiv.className = '';
-      }, 5000);
-    }
-
-    // Connect wallet
-    async function connectWallet() {
-      const connectBtn = document.getElementById('connectWallet');
-      const walletStatus = document.getElementById('walletStatus');
-      const connectionStatus = document.getElementById('connectionStatus');
-      const walletAddress = document.getElementById('walletAddress');
-
-      if (!connectBtn || !walletStatus || !connectionStatus || !walletAddress) return;
-
-      try {
-        if (typeof window.ethereum !== 'undefined') {
-          connectBtn.innerHTML = '<div class="loading"></div> Connecting...';
-          connectBtn.disabled = true;
-          
-          const accounts = await window.ethereum.request({
-            method: 'eth_requestAccounts'
-          });
-          
-          if (accounts && accounts.length > 0) {
-            userAccount = accounts[0];
-            walletConnected = true;
+    <div class="container">
+        <header>
+            <div class="logo">QNX</div>
+            <h1>Qionex</h1>
+            <p class="tagline">Quantum-Level Security Token on Polygon Network</p>
             
-            connectBtn.textContent = '✅ Wallet Connected';
-            connectionStatus.textContent = 'Quantum Wallet Connected';
-            walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
-            walletStatus.classList.add('wallet-connected');
+            <div class="quantum-badge">
+                🔒 Quantum-Protected Transactions
+            </div>
+
+            <div class="wallet-status" id="walletStatus">
+                <div id="connectionStatus">Connect your wallet to access quantum features</div>
+                <div class="wallet-address" id="walletAddress"></div>
+            </div>
+
+            <div class="qrng-display">
+                <div>🎲 Quantum Random Number Generator</div>
+                <div class="qrng-number" id="qrngNumber">Loading...</div>
+            </div>
+
+            <div class="btn-group">
+                <button id="connectWallet">🦊 Connect MetaMask</button>
+                <button id="addMetaMask">➕ Add QNX to MetaMask</button>
+                <button id="viewWhitepaper">📄 Whitepaper</button>
+            </div>
+
+            <div id="statusMessage" class="status-message"></div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">256</div>
+                <div class="stat-label">Quantum Security Level</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="transactionCount">0</div>
+                <div class="stat-label">Protected Transactions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Network Stability</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Quantum Resistance</div>
+            </div>
+        </div>
+
+        <section class="tokenomics">
+            <h2>Tokenomics</h2>
             
-            showStatus('Wallet connected successfully! Quantum security activated.', 'success');
-            updateTransactionCount();
-          } else {
-            throw new Error('No accounts found');
-          }
-          
-        } else {
-          showStatus('MetaMask not detected. Please install MetaMask extension.', 'error');
-          connectBtn.disabled = false;
-          connectBtn.textContent = '🦊 Connect MetaMask';
+            <div class="tokenomics-grid">
+                <div class="token-info">
+                    <h3>Token Information</h3>
+                    <div class="info-row">
+                        <span>Name:</span>
+                        <span><strong>Qionex</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>Symbol:</span>
+                        <span><strong>QNX</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>Network:</span>
+                        <span><strong>Polygon</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>Type:</span>
+                        <span><strong>Quantum-Protected</strong></span>
+                    </div>
+                </div>
+
+                <div class="token-info">
+                    <h3>Supply & Fees</h3>
+                    <div class="info-row">
+                        <span>Total Supply:</span>
+                        <span><strong>1,000,000,000 QNX</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>Buy Fee:</span>
+                        <span><strong>3%</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>Sell Fee:</span>
+                        <span><strong>3%</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>Quantum Security:</span>
+                        <span><strong>Active</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contract-address">
+                <strong>Contract Address:</strong><br>
+                <a href="https://polygonscan.com/address/0x5B38Da6a701c568545dCfcB03FcB875f56beddC4" target="_blank">
+                    0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+                </a>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Quantum Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Post-Quantum Cryptography</h3>
+                    <p>Protected against future quantum computer attacks</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎲</div>
+                    <h3>Quantum Random Generation</h3>
+                    <p>True randomness powered by quantum mechanics</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Polygon network ensures ultra-fast transactions</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Future-Proof</h3>
+                    <p>Designed to remain secure against quantum computers</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Quantum Entanglement</h3>
+                    <p>Advanced quantum principles for maximum security</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Next-Gen Technology</h3>
+                    <p>First quantum-secured token on Polygon</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <span onclick="showStatus('Twitter coming soon!', 'info')">🐦 Twitter</span>
+            <span onclick="showStatus('Telegram coming soon!', 'info')">💬 Telegram</span>
+            <span onclick="showStatus('Discord coming soon!', 'info')">🎮 Discord</span>
+            <span onclick="showStatus('GitHub coming soon!', 'info')">⚡ GitHub</span>
+        </div>
+        <p>&copy; 2025 Qionex. All rights reserved. | Quantum-Secured Technology</p>
+    </footer>
+
+    <script>
+        // Variables
+        let walletConnected = false;
+        let userAccount = null;
+
+        // Show status function
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.className = 'status-message status-' + type;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
         }
-      } catch (error) {
-        console.error('Connection failed:', error);
-        connectBtn.textContent = '🦊 Connect MetaMask';
-        connectBtn.disabled = false;
-        showStatus('Connection failed. Please try again.', 'error');
-      }
-    }
 
-    // Add token to MetaMask
-    async function addTokenToMetaMask() {
-      const addBtn = document.getElementById('addMetaMask');
-      if (!addBtn) return;
-
-      const QIONEX_TOKEN = {
-        address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
-        symbol: 'QNX',
-        decimals: 18,
-        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9IiMwMGY1ZmYiLz4KPHRleHQgeD0iNjAiIHk9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0iOTAwIj5RTlg8L3RleHQ+Cjwvc3ZnPg=='
-      };
-
-      try {
-        if (typeof window.ethereum !== 'undefined') {
-          addBtn.innerHTML = '<div class="loading"></div> Adding...';
-          addBtn.disabled = true;
-          
-          const wasAdded = await window.ethereum.request({
-            method: 'wallet_watchAsset',
-            params: {
-              type: 'ERC20',
-              options: QIONEX_TOKEN,
-            },
-          });
-
-          if (wasAdded) {
-            addBtn.textContent = '✅ QNX Added';
-            showStatus('QNX token added to MetaMask successfully!', 'success');
-          } else {
-            addBtn.textContent = '➕ Add QNX to MetaMask';
-            addBtn.disabled = false;
-            showStatus('Token addition cancelled by user.', 'info');
-          }
-        } else {
-          showStatus('MetaMask not detected. Please install MetaMask extension.', 'error');
-          addBtn.disabled = false;
-        }
-      } catch (error) {
-        console.error('Error adding token:', error);
-        addBtn.textContent = '➕ Add QNX to MetaMask';
-        addBtn.disabled = false;
-        showStatus('Failed to add token. Please try again.', 'error');
-      }
-    }
-
-    // Update transaction count
-    function updateTransactionCount() {
-      const counter = document.getElementById('transactionCount');
-      if (!counter) return;
-      
-      let count = 0;
-      if (transactionInterval) clearInterval(transactionInterval);
-      
-      transactionInterval = setInterval(() => {
-        count += Math.floor(Math.random() * 10) + 1;
-        counter.textContent = count.toLocaleString();
-        if (count > 1000) {
-          clearInterval(transactionInterval);
-          transactionInterval = null;
-        }
-      }, 500);
-    }
-
-    // Open whitepaper
-    function openWhitepaper() {
-      showStatus('Whitepaper will be available soon!', 'info');
-    }
-
-    // Language translations
-    const translations = {
-      en: {
-        tagline: "Quantum-Level Security Token on Polygon Network",
-        connectWallet: "🦊 Connect MetaMask",
-        addToken: "➕ Add QNX to MetaMask",
-        whitepaper: "📄 Whitepaper"
-      },
-      ru: {
-        tagline: "Квантовый Токен Безопасности в Сети Polygon",
-        connectWallet: "🦊 Подключить MetaMask",
-        addToken: "➕ Добавить QNX в MetaMask",
-        whitepaper: "📄 Белая Книга"
-      },
-      zh: {
-        tagline: "基于Polygon网络的量子级安全代币",
-        connectWallet: "🦊 连接 MetaMask",
-        addToken: "➕ 添加 QNX 到 MetaMask",
-        whitepaper: "📄 白皮书"
-      },
-      es: {
-        tagline: "Token de Seguridad Cuántica en la Red Polygon",
-        connectWallet: "🦊 Conectar MetaMask",
-        addToken: "➕ Agregar QNX a MetaMask",
-        whitepaper: "📄 Libro Blanco"
-      },
-      de: {
-        tagline: "Quantensicherheits-Token im Polygon-Netzwerk",
-        connectWallet: "🦊 MetaMask Verbinden",
-        addToken: "➕ QNX zu MetaMask Hinzufügen",
-        whitepaper: "📄 Whitepaper"
-      }
-    };
-
-    function changeLanguage(lang) {
-      const trans = translations[lang] || translations.en;
-      const taglineEl = document.getElementById('tagline');
-      const connectBtn = document.getElementById('connectWallet');
-      const addBtn = document.getElementById('addMetaMask');
-      const whitepaperBtn = document.getElementById('viewWhitepaper');
-      
-      if (taglineEl) taglineEl.textContent = trans.tagline;
-      if (connectBtn && !connectBtn.disabled) connectBtn.textContent = trans.connectWallet;
-      if (addBtn && !addBtn.disabled) addBtn.textContent = trans.addToken;
-      if (whitepaperBtn) whitepaperBtn.textContent = trans.whitepaper;
-    }
-
-    // Event listeners and initialization
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize particles and QRNG
-      createQuantumParticles();
-      updateQRNG();
-      
-      // Add event listeners
-      const connectBtn = document.getElementById('connectWallet');
-      const addBtn = document.getElementById('addMetaMask');
-      const whitepaperBtn = document.getElementById('viewWhitepaper');
-      const languageSelect = document.getElementById('language');
-      
-      if (connectBtn) {
-        connectBtn.addEventListener('click', connectWallet);
-      }
-      
-      if (addBtn) {
-        addBtn.addEventListener('click', addTokenToMetaMask);
-      }
-      
-      if (whitepaperBtn) {
-        whitepaperBtn.addEventListener('click', openWhitepaper);
-      }
-      
-      if (languageSelect) {
-        languageSelect.addEventListener('change', function(e) {
-          changeLanguage(e.target.value);
-        });
-      }
-      
-      // Check if MetaMask is already connected
-      if (typeof window.ethereum !== 'undefined') {
-        window.ethereum.request({ method: 'eth_accounts' })
-          .then(accounts => {
-            if (accounts && accounts.length > 0) {
-              userAccount = accounts[0];
-              walletConnected = true;
-              
-              const connectBtn = document.getElementById('connectWallet');
-              const connectionStatus = document.getElementById('connectionStatus');
-              const walletAddress = document.getElementById('walletAddress');
-              const walletStatus = document.getElementById('walletStatus');
-              
-              if (connectBtn) {
-                connectBtn.textContent = '✅ Wallet Connected';
-                connectBtn.disabled = true;
-              }
-              
-              if (connectionStatus) {
-                connectionStatus.textContent = 'Quantum Wallet Connected';
-              }
-              
-              if (walletAddress) {
-                walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
-              }
-              
-              if (walletStatus) {
-                walletStatus.classList.add('wallet-connected');
-              }
-              
-              updateTransactionCount();
+        // Update QRNG
+        function updateQRNG() {
+            const qrngDisplay = document.getElementById('qrngNumber');
+            
+            function generateNumber() {
+                const number = Math.floor(Math.random() * 999999999).toString().padStart(9, '0');
+                qrngDisplay.textContent = number.match(/.{1,3}/g).join(' ');
             }
-          })
-          .catch(console.error);
-      }
-    });
-  </script>
+            
+            generateNumber();
+            setInterval(generateNumber, 2000);
+        }
+
+        // Connect wallet
+        async function connectWallet() {
+            const connectBtn = document.getElementById('connectWallet');
+            const walletStatus = document.getElementById('walletStatus');
+            const connectionStatus = document.getElementById('connectionStatus');
+            const walletAddress = document.getElementById('walletAddress');
+
+            try {
+                if (typeof window.ethereum !== 'undefined') {
+                    connectBtn.textContent = 'Connecting...';
+                    connectBtn.disabled = true;
+                    
+                    const accounts = await window.ethereum.request({
+                        method: 'eth_requestAccounts'
+                    });
+                    
+                    if (accounts && accounts.length > 0) {
+                        userAccount = accounts[0];
+                        walletConnected = true;
+                        
+                        connectBtn.textContent = '✅ Wallet Connected';
+                        connectionStatus.textContent = 'Quantum Wallet Connected';
+                        walletAddress.textContent = userAccount.slice(0, 6) + '...' + userAccount.slice(-4);
+                        walletStatus.classList.add('wallet-connected');
+                        
+                        showStatus('Wallet connected successfully!', 'success');
+                        updateTransactionCount();
+                    }
+                } else {
+                    showStatus('MetaMask not detected. Please install MetaMask.', 'error');
+                    connectBtn.disabled = false;
+                    connectBtn.textContent = '🦊 Connect MetaMask';
+                }
+            } catch (error) {
+                console.error('Connection failed:', error);
+                connectBtn.textContent = '🦊 Connect MetaMask';
+                connectBtn.disabled = false;
+                showStatus('Connection failed. Please try again.', 'error');
+            }
+        }
+
+        // Add token to MetaMask
+        async function addTokenToMetaMask() {
+            const addBtn = document.getElementById('addMetaMask');
+
+            try {
+                if (typeof window.ethereum !== 'undefined') {
+                    addBtn.textContent = 'Adding...';
+                    addBtn.disabled = true;
+                    
+                    const wasAdded = await window.ethereum.request({
+                        method: 'wallet_watchAsset',
+                        params: {
+                            type: 'ERC20',
+                            options: {
+                                address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
+                                symbol: 'QNX',
+                                decimals: 18
+                            }
+                        }
+                    });
+
+                    if (wasAdded) {
+                        addBtn.textContent = '✅ QNX Added';
+                        showStatus('QNX token added to MetaMask!', 'success');
+                    } else {
+                        addBtn.textContent = '➕ Add QNX to MetaMask';
+                        addBtn.disabled = false;
+                        showStatus('Token addition cancelled.', 'info');
+                    }
+                } else {
+                    showStatus('MetaMask not detected.', 'error');
+                    addBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error adding token:', error);
+                addBtn.textContent = '➕ Add QNX to MetaMask';
+                addBtn.disabled = false;
+                showStatus('Failed to add token.', 'error');
+            }
+        }
+
+        // Update transaction count
+        function updateTransactionCount() {
+            const counter = document.getElementById('transactionCount');
+            let count = 0;
+            
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 10) + 1;
+                counter.textContent = count.toLocaleString();
+                if (count > 1000) {
+                    clearInterval(interval);
+                }
+            }, 500);
+        }
+
+        // Open whitepaper
+        function openWhitepaper() {
+            showStatus('Whitepaper will be available soon!', 'info');
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            
+            // Start QRNG
+            updateQRNG();
+            
+            // Add button listeners
+            document.getElementById('connectWallet').addEventListener('click', connectWallet);
+            document.getElementById('addMetaMask').addEventListener('click', addTokenToMetaMask);
+            document.getElementById('viewWhitepaper').addEventListener('click', openWhitepaper);
+            
+            console.log('All listeners added');
+        });
+    </script>
 </body>
 </html>
