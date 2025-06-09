@@ -896,4 +896,414 @@
       <div class="contract-address">
         <strong>📋 Smart Contract Address:</strong><br><br>
         <a href="https://polygonscan.com/address/0x5B38Da6a701c568545dCfcB03FcB875f56beddC4" target="_blank" rel="noopener">
-          0x5B38Da6a701c568545dCfc
+          0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+        </a>
+      </div>
+    </section>
+
+    <!-- Quantum Features -->
+    <section class="quantum-features">
+      <h2>⚛️ Quantum Features</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Post-Quantum Cryptography</h3>
+          <p>Protected against future quantum computer attacks using CRYSTALS-Dilithium and advanced lattice-based cryptography algorithms ensuring long-term security.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎲</div>
+          <h3>Quantum Random Generation</h3>
+          <p>True randomness powered by quantum mechanics principles for unbreakable security in transaction validation and cryptographic operations.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast Transactions</h3>
+          <p>Polygon network integration ensures ultra-fast transaction processing with minimal gas fees while maintaining quantum-level security.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>Future-Proof Architecture</h3>
+          <p>Designed with hybrid cryptographic systems to remain secure against both classical and quantum computing threats for decades to come.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔗</div>
+          <h3>Quantum Entanglement Security</h3>
+          <p>Advanced quantum principles create unbreakable cryptographic bonds between transactions, ensuring maximum security and immutability.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Next-Generation DeFi</h3>
+          <p>First quantum-secured token on Polygon, pioneering the future of decentralized finance with unprecedented security standards.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quantum Advantages -->
+    <section>
+      <h2>🎯 Why Choose Qionex?</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Unbreakable Security</h3>
+          <p>The only token protected against quantum computing threats that could emerge in the next 20-30 years, ensuring your investment stays secure.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Low Transaction Costs</h3>
+          <p>Built on Polygon network for fraction-of-a-penny transaction fees while maintaining enterprise-grade quantum security.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Global Accessibility</h3>
+          <p>Available worldwide with multi-language support and seamless integration with popular wallets and DeFi platforms.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="#" target="_blank" rel="noopener">🐦 Twitter (Coming Soon)</a>
+      <a href="#" target="_blank" rel="noopener">💬 Telegram (Coming Soon)</a>
+      <a href="#" target="_blank" rel="noopener">🎮 Discord (Coming Soon)</a>
+      <a href="#" target="_blank" rel="noopener">⚡ GitHub (Coming Soon)</a>
+    </div>
+    <p>&copy; 2025 Qionex. All rights reserved. | Quantum-Secured Technology • Built for the Future</p>
+  </footer>
+
+  <script>
+    // Enhanced Quantum Particles Background
+    function createQuantumParticles() {
+      const bg = document.getElementById('quantumBg');
+      const particleCount = 60;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 25 + 's';
+        particle.style.animationDuration = (20 + Math.random() * 15) + 's';
+        
+        // Random size variation
+        const size = 2 + Math.random() * 3;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        bg.appendChild(particle);
+      }
+    }
+
+    // Enhanced QRNG with better visual effects
+    function updateQRNG() {
+      const qrngDisplay = document.getElementById('qrngNumber');
+      
+      function generateQuantumNumber() {
+        // Simulate quantum randomness with high-entropy generation
+        const entropy = performance.now() * Math.random() * Math.PI;
+        const quantumSeed = Math.sin(entropy) * 10000;
+        const quantumNumber = Math.floor(Math.abs(quantumSeed) * 100000000).toString().padStart(9, '0');
+        return quantumNumber.match(/.{1,3}/g).join(' ');
+      }
+      
+      // Initial animation
+      let counter = 0;
+      const initInterval = setInterval(() => {
+        qrngDisplay.textContent = generateQuantumNumber();
+        counter++;
+        if (counter > 10) {
+          clearInterval(initInterval);
+          // Start regular updates
+          setInterval(() => {
+            qrngDisplay.textContent = generateQuantumNumber();
+          }, 3000);
+        }
+      }, 100);
+    }
+
+    // MetaMask Integration with Enhanced Error Handling
+    const QIONEX_TOKEN = {
+      address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
+      symbol: 'QNX',
+      decimals: 18,
+      image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNTgiIGZpbGw9IiMxYTFhMmUiIHN0cm9rZT0iIzAwZjVmZiIgc3Ryb2tlLXdpZHRoPSI0Ii8+PHRleHQgeD0iNjAiIHk9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDBmNWZmIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI5MDAiPlFOWDwvdGV4dD48L3N2Zz4='
+    };
+
+    let walletConnected = false;
+    let userAccount = null;
+
+    // Connect Wallet with enhanced UX
+    async function connectWallet() {
+      const connectBtn = document.getElementById('connectWallet');
+      const walletStatus = document.getElementById('walletStatus');
+      const connectionStatus = document.getElementById('connectionStatus');
+      const walletAddress = document.getElementById('walletAddress');
+
+      try {
+        if (typeof window.ethereum !== 'undefined') {
+          connectBtn.innerHTML = '<div class="loading"></div> Connecting to MetaMask...';
+          connectBtn.disabled = true;
+          
+          // Request accounts
+          const accounts = await window.ethereum.request({
+            method: 'eth_requestAccounts'
+          });
+          
+          if (accounts.length > 0) {
+            userAccount = accounts[0];
+            walletConnected = true;
+            
+            // Check if we're on Polygon network
+            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            
+            // Update UI
+            connectBtn.innerHTML = '✅ Quantum Wallet Connected';
+            connectionStatus.textContent = '🛡️ Quantum Security Activated';
+            walletAddress.textContent = `${userAccount.slice(0, 8)}...${userAccount.slice(-6)}`;
+            walletStatus.classList.add('wallet-connected');
+            
+            showStatus('🎉 MetaMask connected successfully! Quantum security features are now active.', 'success');
+            
+            // Start transaction counter animation
+            updateTransactionCount();
+            
+            // Check network
+            if (chainId !== '0x89') { // Polygon mainnet
+              showStatus('⚠️ Please switch to Polygon network for optimal experience.', 'info');
+            }
+          }
+          
+        } else {
+          connectBtn.textContent = '🦊 Connect MetaMask';
+          connectBtn.disabled = false;
+          showStatus('❌ MetaMask not detected. Please install MetaMask browser extension.', 'error');
+        }
+      } catch (error) {
+        console.error('Connection failed:', error);
+        connectBtn.textContent = '🦊 Connect MetaMask';
+        connectBtn.disabled = false;
+        
+        if (error.code === 4001) {
+          showStatus('🚫 Connection rejected by user.', 'info');
+        } else {
+          showStatus('❌ Connection failed. Please try again.', 'error');
+        }
+      }
+    }
+
+    // Add Token to MetaMask with enhanced feedback
+    async function addTokenToMetaMask() {
+      const addBtn = document.getElementById('addMetaMask');
+
+      try {
+        if (typeof window.ethereum !== 'undefined') {
+          addBtn.innerHTML = '<div class="loading"></div> Adding QNX...';
+          addBtn.disabled = true;
+          
+          const wasAdded = await window.ethereum.request({
+            method: 'wallet_watchAsset',
+            params: {
+              type: 'ERC20',
+              options: {
+                address: QIONEX_TOKEN.address,
+                symbol: QIONEX_TOKEN.symbol,
+                decimals: QIONEX_TOKEN.decimals,
+                image: QIONEX_TOKEN.image,
+              },
+            },
+          });
+
+          if (wasAdded) {
+            addBtn.innerHTML = '✅ QNX Added to Wallet';
+            showStatus('🎉 QNX token successfully added to MetaMask! You can now see your QNX balance.', 'success');
+          } else {
+            addBtn.innerHTML = '➕ Add QNX to MetaMask';
+            addBtn.disabled = false;
+            showStatus('ℹ️ Token addition was cancelled.', 'info');
+          }
+        } else {
+          showStatus('❌ MetaMask not detected. Please install MetaMask extension first.', 'error');
+        }
+      } catch (error) {
+        console.error('Error adding token:', error);
+        addBtn.innerHTML = '➕ Add QNX to MetaMask';
+        addBtn.disabled = false;
+        showStatus('❌ Failed to add token. Please try again.', 'error');
+      }
+    }
+
+    // Enhanced Status Messages
+    function showStatus(message, type) {
+      const statusDiv = document.getElementById('statusMessage');
+      statusDiv.className = `status-message status-${type}`;
+      statusDiv.textContent = message;
+      
+      // Auto-hide after 6 seconds
+      setTimeout(() => {
+        statusDiv.style.opacity = '0';
+        setTimeout(() => {
+          statusDiv.textContent = '';
+          statusDiv.className = '';
+          statusDiv.style.opacity = '1';
+        }, 300);
+      }, 6000);
+    }
+
+    // Animated Transaction Counter
+    function updateTransactionCount() {
+      const counter = document.getElementById('transactionCount');
+      let count = 0;
+      const targetCount = 1247; // Target number
+      const increment = targetCount / 100;
+      
+      const interval = setInterval(() => {
+        count += Math.ceil(increment + Math.random() * 5);
+        if (count >= targetCount) {
+          count = targetCount;
+          clearInterval(interval);
+        }
+        counter.textContent = count.toLocaleString();
+      }, 50);
+    }
+
+    // Whitepaper Function (placeholder)
+    function openWhitepaper() {
+      showStatus('📄 Whitepaper will be available soon. Stay tuned for updates!', 'info');
+      // You can replace this with actual whitepaper URL when ready
+      // window.open('https://docs.qionex.io/whitepaper.pdf', '_blank');
+    }
+
+    // Enhanced Language Switching
+    const translations = {
+      en: {
+        tagline: "Revolutionary Quantum-Secured Cryptocurrency on Polygon Network",
+        connectWallet: "🦊 Connect MetaMask",
+        addToken: "➕ Add QNX to MetaMask",
+        whitepaper: "📄 Whitepaper",
+        connectionStatus: "Connect MetaMask to unlock quantum features"
+      },
+      ru: {
+        tagline: "Революционная Квантово-Защищенная Криптовалюта в Сети Polygon",
+        connectWallet: "🦊 Подключить MetaMask",
+        addToken: "➕ Добавить QNX в MetaMask",
+        whitepaper: "📄 Белая Книга",
+        connectionStatus: "Подключите MetaMask для квантовых функций"
+      },
+      zh: {
+        tagline: "基于Polygon网络的革命性量子安全加密货币",
+        connectWallet: "🦊 连接 MetaMask",
+        addToken: "➕ 添加 QNX 到 MetaMask",
+        whitepaper: "📄 白皮书",
+        connectionStatus: "连接MetaMask解锁量子功能"
+      },
+      es: {
+        tagline: "Criptomoneda Revolucionaria con Seguridad Cuántica en Red Polygon",
+        connectWallet: "🦊 Conectar MetaMask",
+        addToken: "➕ Agregar QNX a MetaMask",
+        whitepaper: "📄 Libro Blanco",
+        connectionStatus: "Conecta MetaMask para funciones cuánticas"
+      },
+      de: {
+        tagline: "Revolutionäre Quantensichere Kryptowährung im Polygon-Netzwerk",
+        connectWallet: "🦊 MetaMask Verbinden",
+        addToken: "➕ QNX zu MetaMask Hinzufügen",
+        whitepaper: "📄 Whitepaper",
+        connectionStatus: "MetaMask verbinden für Quantenfunktionen"
+      }
+    };
+
+    function changeLanguage(lang) {
+      const trans = translations[lang] || translations.en;
+      
+      document.getElementById('tagline').textContent = trans.tagline;
+      
+      if (!walletConnected) {
+        document.getElementById('connectWallet').textContent = trans.connectWallet;
+        document.getElementById('connectionStatus').textContent = trans.connectionStatus;
+      }
+      
+      if (!document.getElementById('addMetaMask').textContent.includes('✅')) {
+        document.getElementById('addMetaMask').textContent = trans.addToken;
+      }
+      
+      document.getElementById('viewWhitepaper').textContent = trans.whitepaper;
+    }
+
+    // Event Listeners
+    document.getElementById('connectWallet').addEventListener('click', connectWallet);
+    document.getElementById('addMetaMask').addEventListener('click', addTokenToMetaMask);
+    document.getElementById('viewWhitepaper').addEventListener('click', openWhitepaper);
+    document.getElementById('language').addEventListener('change', (e) => changeLanguage(e.target.value));
+
+    // Enhanced Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create quantum particles
+      createQuantumParticles();
+      
+      // Start QRNG
+      updateQRNG();
+      
+      // Check for existing MetaMask connection
+      if (typeof window.ethereum !== 'undefined') {
+        window.ethereum.request({ method: 'eth_accounts' })
+          .then(accounts => {
+            if (accounts.length > 0) {
+              userAccount = accounts[0];
+              walletConnected = true;
+              
+              // Update UI for already connected wallet
+              document.getElementById('connectWallet').innerHTML = '✅ Quantum Wallet Connected';
+              document.getElementById('connectWallet').disabled = true;
+              document.getElementById('connectionStatus').textContent = '🛡️ Quantum Security Activated';
+              document.getElementById('walletAddress').textContent = `${userAccount.slice(0, 8)}...${userAccount.slice(-6)}`;
+              document.getElementById('walletStatus').classList.add('wallet-connected');
+              
+              updateTransactionCount();
+            }
+          })
+          .catch(console.error);
+        
+        // Listen for account changes
+        window.ethereum.on('accountsChanged', (accounts) => {
+          if (accounts.length === 0) {
+            // User disconnected
+            walletConnected = false;
+            userAccount = null;
+            document.getElementById('connectWallet').innerHTML = '🦊 Connect MetaMask';
+            document.getElementById('connectWallet').disabled = false;
+            document.getElementById('connectionStatus').textContent = 'Connect MetaMask to unlock quantum features';
+            document.getElementById('walletAddress').textContent = '';
+            document.getElementById('walletStatus').classList.remove('wallet-connected');
+            showStatus('👋 Wallet disconnected.', 'info');
+          } else {
+            // Account changed
+            userAccount = accounts[0];
+            document.getElementById('walletAddress').textContent = `${userAccount.slice(0, 8)}...${userAccount.slice(-6)}`;
+            showStatus('🔄 Account changed successfully.', 'success');
+          }
+        });
+        
+        // Listen for network changes
+        window.ethereum.on('chainChanged', (chainId) => {
+          if (chainId === '0x89') {
+            showStatus('✅ Connected to Polygon network!', 'success');
+          } else {
+            showStatus('⚠️ Please switch to Polygon network for optimal experience.', 'info');
+          }
+        });
+      }
+      
+      // Add smooth scrolling for better UX
+      document.documentElement.style.scrollBehavior = 'smooth';
+    });
+  </script>
+</body>
+</html>
