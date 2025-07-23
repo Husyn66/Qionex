@@ -1,171 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Qionex (QNX) is a quantum-enhanced DeFi token built on the Polygon network, focused on security, scalability and community utility." />
-  <meta name="keywords" content="Qionex, QNX, crypto, token, Polygon, DeFi, Web3, blockchain" />
-  <title>Qionex (QNX) — The Quantum Future of Crypto</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qionex (QNX) | Official Token Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #0c0c1d, #191936);
-      color: #fff;
-      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
+      text-align: center;
     }
     header {
-      background: rgba(0, 0, 0, 0.8);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 999;
+      padding: 40px 20px;
     }
-    .container {
-      width: 90%;
-      margin: auto;
-      max-width: 1200px;
+    h1 {
+      font-size: 3em;
+      color: #00ffcc;
     }
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: flex-end;
-      gap: 20px;
-      padding: 1rem 0;
+    p {
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 1.2em;
+      line-height: 1.5;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      color: #4bffe2;
-    }
-    #hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: url('assets/hero-bg.svg') no-repeat center center/cover;
-      padding-top: 80px;
-    }
-    #hero h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    #hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-    }
-    .btn-primary {
-      padding: 12px 24px;
-      background: #4bffe2;
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #00ffcc;
       color: #000;
       font-weight: bold;
-      border: none;
       border-radius: 8px;
-      cursor: pointer;
       text-decoration: none;
+      margin: 15px;
       transition: background 0.3s;
     }
-    .btn-primary:hover {
-      background: #35e0c6;
+    .btn:hover {
+      background-color: #00cc99;
     }
-    section {
-      padding: 80px 0;
+    .lang { display: none; }
+    .lang.active { display: block; }
+    #lang-buttons {
+      margin: 20px;
+    }
+    #lang-buttons button {
+      margin: 0 5px;
+      padding: 8px 12px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #lang-buttons button:hover {
+      background: #555;
     }
     footer {
-      background: #000;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
+      padding: 40px 20px;
+      font-size: 0.9em;
       color: #aaa;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#tokenomics">Tokenomics</a></li>
-          <li><a href="#roadmap">Roadmap</a></li>
-          <li><a href="#buy">Buy</a></li>
-          <li><a href="#community">Community</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div id="lang-buttons">
+    <button onclick="setLang('en')">🇬🇧 EN</button>
+    <button onclick="setLang('ru')">🇷🇺 RU</button>
+    <button onclick="setLang('tr')">🇹🇷 TR</button>
+    <button onclick="setLang('zh')">🇨🇳 中文</button>
+  </div>
 
-  <section id="hero">
-    <div class="container">
-      <h2>Qionex (QNX)</h2>
-      <p>The Quantum-Enhanced Token on Polygon – built for speed, security and the future.</p>
-      <a href="#buy" class="btn-primary">Buy QNX</a>
-    </div>
-  </section>
+  <div class="lang active" id="en">
+    <header>
+      <h1>Qionex (QNX)</h1>
+      <p>Future-proof token on Polygon with DAO, staking, protection and innovation.</p>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">Buy QNX</a>
+      <a class="btn" href="whitepaper.pdf" download>Download Whitepaper</a>
+    </header>
+    <section>
+      <p><strong>Contract Address:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <p><strong>Network:</strong> Polygon<br><strong>Total Supply:</strong> 1,500,000,000 QNX</p>
+    </section>
+  </div>
 
-  <section id="about" class="section">
-    <div class="container">
-      <h3>About Qionex</h3>
-      <p>Qionex (QNX) is a powerful ERC-20 token deployed on the Polygon blockchain. Designed for community utility and real-world adaptability, it features advanced protection mechanisms such as Quantum Lock, Adaptive Fees, DAO governance, and a reward system powered by a Dead Wallet structure.</p>
-    </div>
-  </section>
+  <div class="lang" id="ru">
+    <header>
+      <h1>Кионекс (QNX)</h1>
+      <p>Передовой токен на Polygon с DAO, стейкингом, защитой и инновациями.</p>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">Купить QNX</a>
+      <a class="btn" href="whitepaper.pdf" download>Скачать Whitepaper</a>
+    </header>
+    <section>
+      <p><strong>Адрес контракта:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <p><strong>Сеть:</strong> Polygon<br><strong>Общее предложение:</strong> 1,500,000,000 QNX</p>
+    </section>
+  </div>
 
-  <section id="tokenomics" class="section">
-    <div class="container">
-      <h3>Tokenomics</h3>
-      <ul>
-        <li><strong>Total Supply:</strong> 1.5 Billion QNX</li>
-        <li><strong>Network:</strong> Polygon (MATIC)</li>
-        <li><strong>Contract:</strong> <code>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</code></li>
-        <li><strong>Treasury:</strong> <code>0xC9C4567eF619Dc3dBeABDa0Be4f43D5DD6cA73d</code></li>
-      </ul>
-    </div>
-  </section>
+  <div class="lang" id="tr">
+    <header>
+      <h1>Qionex (QNX)</h1>
+      <p>DAO, staking, koruma ve yenilik ile Polygon üzerinde geleceğe hazır token.</p>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">QNX Satın Al</a>
+      <a class="btn" href="whitepaper.pdf" download>Whitepaper İndir</a>
+    </header>
+    <section>
+      <p><strong>Kontrat Adresi:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <p><strong>Ağ:</strong> Polygon<br><strong>Toplam Arz:</strong> 1,500,000,000 QNX</p>
+    </section>
+  </div>
 
-  <section id="roadmap" class="section">
-    <div class="container">
-      <h3>Roadmap</h3>
-      <ol>
-        <li>✅ Token Launch and Website</li>
-        <li>🔜 Social and Community Building</li>
-        <li>🔜 Whitepaper, Audit & Marketing</li>
-        <li>🔜 Exchange Listings (DEX/CEX)</li>
-        <li>🔜 NFT + DAO Integration</li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="buy" class="section">
-    <div class="container">
-      <h3>How to Buy</h3>
-      <p>Connect MetaMask to Polygon. Go to QuickSwap or another DEX and paste the token address. Swap MATIC for QNX.</p>
-      <a class="btn-primary" href="https://polygonscan.com/token/0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea" target="_blank">View on Polygonscan</a>
-    </div>
-  </section>
-
-  <section id="community" class="section">
-    <div class="container">
-      <h3>Community</h3>
-      <p>Join our global movement. Follow us and contribute to the evolution of crypto with Qionex.</p>
-      <ul>
-        <li><a href="#">Telegram</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">GitHub</a></li>
-      </ul>
-    </div>
-  </section>
+  <div class="lang" id="zh">
+    <header>
+      <h1>Qionex (QNX)</h1>
+      <p>基于 Polygon 的未来型代币，支持DAO、质押、安全与创新。</p>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">购买 QNX</a>
+      <a class="btn" href="whitepaper.pdf" download>下载白皮书</a>
+    </header>
+    <section>
+      <p><strong>合约地址:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <p><strong>网络:</strong> Polygon<br><strong>总供应量:</strong> 1,500,000,000 QNX</p>
+    </section>
+  </div>
 
   <footer>
-    <div class="container">
-      <p>&copy; 2025 Qionex. All rights reserved.</p>
-    </div>
+    <p>&copy; 2025 Qionex. All rights reserved. | Telegram: @Qionex | GitHub: Husyn66</p>
   </footer>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+      document.getElementById(lang).classList.add('active');
+    }
+  </script>
 </body>
 </html>
