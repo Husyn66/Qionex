@@ -8,7 +8,7 @@ document.getElementById("addMetaMask").onclick = async () => {
           address: '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4',
           symbol: 'QNX',
           decimals: 18,
-          image: 'https://qionex.com/assets/qionex-logo.png',
+          image: image: 'https://husyn66.github.io/Qionex/assets/qionex-logo.png'
         },
       },
     });
