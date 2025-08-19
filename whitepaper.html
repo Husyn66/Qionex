@@ -4,10 +4,140 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Qionex (QNX) WhitePaper</title>
+
+  <!-- SEO -->
   <meta name="description" content="Qionex (QNX) — next-gen Polygon token with adaptive fees, quantum-lock security, DAO governance, staking, and cross-chain utility.">
+  <link rel="canonical" href="https://qionex.com/whitepaper.html">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Qionex (QNX) — WhitePaper">
+  <meta property="og:description" content="Adaptive fees • Quantum Lock • DAO • Staking • Cross-chain">
+  <meta property="og:url" content="https://qionex.com/whitepaper.html">
+  <meta property="og:image" content="https://qionex.com/assets/og-qionex.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Qionex (QNX) — WhitePaper">
+  <meta name="twitter:description" content="Adaptive fees • Quantum Lock • DAO • Staking • Cross-chain">
+  <meta name="twitter:image" content="https://qionex.com/assets/og-qionex.jpg">
+
+  <style>
+    /* === СТИЛИ (сократил комментарии, оставил всё рабочее) === */
+    :root {
+      --primary-bg: #0b0d12;
+      --text-primary: #e8ecf1;
+      --text-secondary: #c9d5ff;
+      --highlight: #ff4444;
+      --border-color: rgba(255, 255, 255, 0.14);
+      --card-bg: rgba(0,0,0,0.7);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--primary-bg); color: var(--text-primary); line-height: 1.6;
+    }
+    header { position: sticky; top: 0; z-index: 10; padding: 16px;
+      background: linear-gradient(rgba(11, 13, 18, 0.85), rgba(11, 13, 18, 0.85)),
+      url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+    header .wrap { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+    header h1 { font-size: 24px; margin: 0; }
+    header h1 .highlight { color: var(--highlight); }
+    nav { display: flex; gap: 15px; margin-left: auto; flex-wrap: wrap; }
+    nav a { text-decoration: none; padding: 5px 10px; border-radius: 6px; color: var(--text-secondary); }
+    nav a.active { color: var(--highlight); background: rgba(255, 68, 68, 0.08); }
+    main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    section { margin-bottom: 42px; scroll-margin-top: 90px;
+      background: linear-gradient(var(--card-bg), var(--card-bg)),
+      url('https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center/cover;
+      padding: 28px 16px; border-radius: 12px; border: 1px solid var(--border-color);
+    }
+    .section-content { display: flex; gap: 20px; align-items: flex-start; }
+    .sidebar { width: 220px; background: rgba(0,0,0,0.8); padding: 16px; border-radius: 10px; }
+    .sidebar h3 { color: #ff4444; font-size: 18px; margin-bottom: 10px; text-align: center; }
+    .main-content { flex-grow: 1; }
+    h2 { font-size: 28px; margin-bottom: 16px; }
+    p { margin-bottom: 16px; }
+    strong { color: var(--text-secondary); }
+    .btn { display: inline-block; padding: 10px 16px; background: var(--highlight); color: var(--primary-bg);
+      text-decoration: none; border-radius: 8px; margin: 6px 10px 0 0;
+    }
+    .btn:hover { background: #e43b3b; }
+    footer { text-align: center; padding: 24px 20px; border-top: 1px solid var(--border-color); margin-top: 40px; }
+  </style>
 </head>
 <body>
-  <h1>Qionex (QNX) — WhitePaper</h1>
-  <p>This is the improved HTML version of the Qionex WhitePaper. Upload this file to GitHub as <strong>whitepaper.html</strong>.</p>
+<header>
+  <div class="wrap">
+    <img src="https://via.placeholder.com/150?text=Qionex+Logo" alt="Qionex Logo" style="max-height:40px;">
+    <h1>Qionex (QNX) — <span class="highlight">WhitePaper</span></h1>
+    <nav>
+      <a href="#introduction">Introduction</a>
+      <a href="#vision">Vision</a>
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#tech">Technology</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#distribution">Distribution</a>
+      <a href="#governance">Governance</a>
+      <a href="#utility">Utility</a>
+      <a href="#security">Security</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#team">Team</a>
+      <a href="#closing">Closing</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- === СЕКЦИИ (пример) === -->
+  <section id="introduction">
+    <div class="section-content">
+      <aside class="sidebar"><h3>INTRODUCTION</h3><ul><li>Overview</li><li>Purpose</li><li>Scope</li></ul></aside>
+      <div class="main-content">
+        <h2>1. Introduction</h2>
+        <p>Qionex (QNX) is a next-generation cryptocurrency built on <strong>Polygon</strong>, designed to deliver scalability, security, and quantum-level innovation...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- … здесь идут все остальные секции: Vision, Problem, Solution, Tech, Tokenomics, Distribution, Governance, Utility, Security, Roadmap, Ecosystem, Team, Closing … -->
+
+  <section id="closing">
+    <div class="section-content">
+      <aside class="sidebar"><h3>CONCLUSION</h3><ul><li>Summary</li><li>Future</li></ul></aside>
+      <div class="main-content">
+        <h2>14. Conclusion</h2>
+        <p>Qionex represents more than just another cryptocurrency token — it is the cornerstone of a comprehensive decentralized ecosystem.</p>
+        <p><strong class="highlight">The Future is Qionex — Own it. Build it. Live it.</strong></p>
+        <a class="btn" href="https://qionex.com" target="_blank">🌐 Official Website</a>
+        <a class="btn" href="https://t.me/Qionex" target="_blank">💬 Telegram</a>
+        <a class="btn" href="https://x.com/Qionex" target="_blank">🐦 Twitter</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Qionex Protocol. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // Навигация: подсветка активной секции
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const sections = document.querySelectorAll('section');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.offsetTop - 120;
+      if (scrollY >= top) current = section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').substring(1) === current) link.classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
