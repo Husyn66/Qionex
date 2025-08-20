@@ -4,198 +4,752 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Qionex (QNX) | Official Token Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Qionex (QNX) - Future-proof token on Polygon with DAO, staking, protection and innovation">
+  <meta name="keywords" content="Qionex, QNX, token, cryptocurrency, Polygon, DAO, staking, blockchain">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #00ffcc;
+      --primary-hover: #00cc99;
+      --background-dark: #0f0f0f;
+      --background-secondary: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #aaaaaa;
+      --border-color: #555555;
+      --card-background: #222222;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-      color: white;
+      background: linear-gradient(135deg, var(--background-dark), var(--background-secondary));
+      color: var(--text-primary);
       text-align: center;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
+    
+    /* Header Styles */
     header {
-      padding: 40px 20px;
+      padding: 60px 20px;
+      position: relative;
     }
+    
     h1 {
-      font-size: 3em;
-      color: #00ffcc;
+      font-size: clamp(2.5em, 5vw, 4em);
+      color: var(--primary-color);
+      margin: 0 0 20px 0;
+      text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+      animation: glow 2s ease-in-out infinite alternate;
     }
+    
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(0, 255, 204, 0.3); }
+      to { text-shadow: 0 0 30px rgba(0, 255, 204, 0.6); }
+    }
+    
+    /* Language Selector */
+    #lang-buttons {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    #lang-buttons button {
+      padding: 10px 15px;
+      background: var(--card-background);
+      color: var(--text-primary);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    
+    #lang-buttons button:hover,
+    #lang-buttons button.active {
+      background: var(--primary-color);
+      color: #000;
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+    
+    /* Content Sections */
+    section {
+      margin: 40px 0;
+      padding: 0 20px;
+    }
+    
     p {
       max-width: 800px;
       margin: 20px auto;
-      font-size: 1.2em;
-      line-height: 1.5;
+      font-size: 1.1em;
+      line-height: 1.7;
     }
+    
+    /* Button Styles */
     .btn {
       display: inline-block;
       padding: 15px 30px;
-      background-color: #00ffcc;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
       color: #000;
-      font-weight: bold;
-      border-radius: 8px;
+      font-weight: 700;
+      border-radius: 12px;
       text-decoration: none;
-      margin: 15px;
-      transition: background 0.3s;
+      margin: 15px 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+      position: relative;
+      overflow: hidden;
     }
+    
     .btn:hover {
-      background-color: #00cc99;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(0, 255, 204, 0.5);
     }
+    
+    .btn:active {
+      transform: translateY(-1px);
+    }
+    
+    /* Contract Address Styling */
+    .contract-address {
+      background: var(--card-background);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px auto;
+      max-width: 600px;
+      border: 1px solid var(--border-color);
+      word-break: break-all;
+      position: relative;
+    }
+    
+    .copy-btn {
+      background: var(--primary-color);
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .copy-btn:hover {
+      background: var(--primary-hover);
+      transform: scale(1.05);
+    }
+    
+    /* Language Content */
     .lang {
       display: none;
+      animation: fadeIn 0.5s ease-in-out;
     }
+    
     .lang.active {
       display: block;
     }
-    #lang-buttons {
-      margin: 20px;
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    #lang-buttons button {
-      margin: 0 5px;
-      padding: 8px 12px;
-      background: #333;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    
+    /* Table Styles */
+    .tokenomics-container {
+      overflow-x: auto;
+      margin: 30px 0;
     }
-    #lang-buttons button:hover {
-      background: #555;
-    }
+    
     table {
       margin: 20px auto;
       border-collapse: collapse;
-      color: white;
+      color: var(--text-primary);
+      background: var(--card-background);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      min-width: 300px;
     }
+    
     th, td {
-      border: 1px solid #555;
-      padding: 10px 15px;
+      border: 1px solid var(--border-color);
+      padding: 15px 20px;
+      text-align: left;
     }
+    
     th {
-      background-color: #111;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+    
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    tr:hover {
+      background: rgba(0, 255, 204, 0.1);
+    }
+    
+    /* Roadmap Styles */
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .roadmap-item {
+      background: var(--card-background);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .roadmap-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+      border-color: var(--primary-color);
+    }
+    
+    .roadmap-item h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 1.3em;
+    }
+    
+    /* Footer */
     footer {
-      padding: 40px 20px;
+      padding: 50px 20px;
       font-size: 0.9em;
-      color: #aaa;
+      color: var(--text-secondary);
+      background: var(--background-dark);
+      margin-top: 60px;
+    }
+    
+    footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    footer a:hover {
+      color: var(--primary-hover);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 40px 15px;
+      }
+      
+      .btn {
+        display: block;
+        margin: 10px auto;
+        max-width: 250px;
+      }
+      
+      #lang-buttons {
+        padding: 0 10px;
+      }
+      
+      table {
+        font-size: 14px;
+      }
+      
+      th, td {
+        padding: 10px 12px;
+      }
+    }
+    
+    /* Loading Animation */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    
+    /* Accessibility Improvements */
+    button:focus,
+    .btn:focus,
+    .copy-btn:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+    
+    /* Success Message for Copy */
+    .copy-success {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: #000;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 1000;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .copy-success.show {
+      transform: translateX(0);
     }
   </style>
 </head>
 <body>
-  <div id="lang-buttons">
-    <button onclick="setLang('en')">🇬🇧 EN</button>
-    <button onclick="setLang('ru')">🇷🇺 RU</button>
-    <button onclick="setLang('tr')">🇹🇷 TR</button>
-    <button onclick="setLang('zh')">🇨🇳 中文</button>
+  <!-- Language Selection Buttons -->
+  <div id="lang-buttons" role="navigation" aria-label="Language selection">
+    <button onclick="setLang('en')" aria-label="Switch to English">🇬🇧 EN</button>
+    <button onclick="setLang('ru')" aria-label="Switch to Russian">🇷🇺 RU</button>
+    <button onclick="setLang('tr')" aria-label="Switch to Turkish">🇹🇷 TR</button>
+    <button onclick="setLang('zh')" aria-label="Switch to Chinese">🇨🇳 中文</button>
   </div>
 
-  <div class="lang active" id="en">
+  <!-- English Content -->
+  <div class="lang active" id="en" lang="en">
     <header>
       <h1>Qionex (QNX)</h1>
       <p>Future-proof token on Polygon with DAO, staking, protection and innovation.</p>
-      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">Buy QNX</a>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank" rel="noopener noreferrer">Buy QNX</a>
       <a class="btn" href="whitepaper.pdf" download>Download Whitepaper</a>
     </header>
+    
     <section>
-      <p><strong>Contract Address:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <div class="contract-address">
+        <p><strong>Contract Address:</strong><br>
+        <span id="contract-en">0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</span></p>
+        <button class="copy-btn" onclick="copyToClipboard('contract-en')">Copy Address</button>
+      </div>
       <p><strong>Network:</strong> Polygon<br><strong>Total Supply:</strong> 1,500,000,000 QNX</p>
     </section>
+    
     <section>
       <h2>Tokenomics</h2>
-      <table>
-        <tr><th>Category</th><th>Allocation</th></tr>
-        <tr><td>Development</td><td>25%</td></tr>
-        <tr><td>Staking Rewards</td><td>20%</td></tr>
-        <tr><td>Liquidity</td><td>15%</td></tr>
-        <tr><td>Marketing</td><td>10%</td></tr>
-        <tr><td>Team</td><td>10%</td></tr>
-        <tr><td>Advisors</td><td>5%</td></tr>
-        <tr><td>Reserve</td><td>15%</td></tr>
-      </table>
+      <div class="tokenomics-container">
+        <table>
+          <thead>
+            <tr><th>Category</th><th>Allocation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Development</td><td>25%</td></tr>
+            <tr><td>Staking Rewards</td><td>20%</td></tr>
+            <tr><td>Liquidity</td><td>15%</td></tr>
+            <tr><td>Marketing</td><td>10%</td></tr>
+            <tr><td>Team</td><td>10%</td></tr>
+            <tr><td>Advisors</td><td>5%</td></tr>
+            <tr><td>Reserve</td><td>15%</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
+    
     <section>
       <h2>Roadmap</h2>
-      <p><strong>Q3 2025:</strong> Website launch, Token Deployment, Whitepaper Release</p>
-      <p><strong>Q4 2025:</strong> CEX Listing, DAO Activation, Staking Live</p>
-      <p><strong>Q1 2026:</strong> NFT Module, Governance Expansion, Mobile App Beta</p>
-      <p><strong>Q2 2026:</strong> Ecosystem Partnerships, Qionex Labs Launch</p>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <h3>Q3 2025</h3>
+          <p>Website launch, Token Deployment, Whitepaper Release</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>Q4 2025</h3>
+          <p>CEX Listing, DAO Activation, Staking Live</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>Q1 2026</h3>
+          <p>NFT Module, Governance Expansion, Mobile App Beta</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>Q2 2026</h3>
+          <p>Ecosystem Partnerships, Qionex Labs Launch</p>
+        </div>
+      </div>
     </section>
   </div>
 
-  <div class="lang" id="ru">
+  <!-- Russian Content -->
+  <div class="lang" id="ru" lang="ru">
     <header>
-      <h1>Кионекс (QNX)</h1>
+      <h1>Qionex (QNX)</h1>
       <p>Передовой токен на сети Polygon с DAO, стейкингом, защитой и инновациями.</p>
-      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">Купить QNX</a>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank" rel="noopener noreferrer">Купить QNX</a>
       <a class="btn" href="whitepaper.pdf" download>Скачать Whitepaper</a>
     </header>
+    
     <section>
-      <p><strong>Адрес контракта:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <div class="contract-address">
+        <p><strong>Адрес контракта:</strong><br>
+        <span id="contract-ru">0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</span></p>
+        <button class="copy-btn" onclick="copyToClipboard('contract-ru')">Копировать адрес</button>
+      </div>
       <p><strong>Сеть:</strong> Polygon<br><strong>Общее предложение:</strong> 1,500,000,000 QNX</p>
     </section>
+    
     <section>
       <h2>Токеномика</h2>
-      <table>
-        <tr><th>Категория</th><th>Распределение</th></tr>
-        <tr><td>Разработка</td><td>25%</td></tr>
-        <tr><td>Вознаграждение за стейкинг</td><td>20%</td></tr>
-        <tr><td>Ликвидность</td><td>15%</td></tr>
-        <tr><td>Маркетинг</td><td>10%</td></tr>
-        <tr><td>Команда</td><td>10%</td></tr>
-        <tr><td>Советники</td><td>5%</td></tr>
-        <tr><td>Резерв</td><td>15%</td></tr>
-      </table>
+      <div class="tokenomics-container">
+        <table>
+          <thead>
+            <tr><th>Категория</th><th>Распределение</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Разработка</td><td>25%</td></tr>
+            <tr><td>Вознаграждение за стейкинг</td><td>20%</td></tr>
+            <tr><td>Ликвидность</td><td>15%</td></tr>
+            <tr><td>Маркетинг</td><td>10%</td></tr>
+            <tr><td>Команда</td><td>10%</td></tr>
+            <tr><td>Советники</td><td>5%</td></tr>
+            <tr><td>Резерв</td><td>15%</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
+    
     <section>
       <h2>Дорожная карта</h2>
-      <p><strong>3 квартал 2025:</strong> Запуск сайта, деплой контракта, публикация whitepaper</p>
-      <p><strong>4 квартал 2025:</strong> Листинг на CEX, запуск DAO, стейкинг</p>
-      <p><strong>1 квартал 2026:</strong> NFT-модуль, расширение управления, бета мобильного приложения</p>
-      <p><strong>2 квартал 2026:</strong> Партнёрства, запуск Qionex Labs</p>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <h3>3 квартал 2025</h3>
+          <p>Запуск сайта, деплой контракта, публикация whitepaper</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>4 квартал 2025</h3>
+          <p>Листинг на CEX, запуск DAO, стейкинг</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>1 квартал 2026</h3>
+          <p>NFT-модуль, расширение управления, бета мобильного приложения</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2 квартал 2026</h3>
+          <p>Партнёрства, запуск Qionex Labs</p>
+        </div>
+      </div>
     </section>
   </div>
 
-  <div class="lang" id="tr">
+  <!-- Turkish Content -->
+  <div class="lang" id="tr" lang="tr">
     <header>
       <h1>Qionex (QNX)</h1>
       <p>DAO, staking, güvenlik ve yenilik ile Polygon ağında geleceğe hazır bir token.</p>
-      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank">QNX Satın Al</a>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank" rel="noopener noreferrer">QNX Satın Al</a>
       <a class="btn" href="whitepaper.pdf" download>Whitepaper İndir</a>
     </header>
+    
     <section>
-      <p><strong>Kontrat Adresi:</strong><br>0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</p>
+      <div class="contract-address">
+        <p><strong>Kontrat Adresi:</strong><br>
+        <span id="contract-tr">0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</span></p>
+        <button class="copy-btn" onclick="copyToClipboard('contract-tr')">Adresi Kopyala</button>
+      </div>
       <p><strong>Ağ:</strong> Polygon<br><strong>Toplam Arz:</strong> 1,500,000,000 QNX</p>
     </section>
+    
     <section>
       <h2>Tokenomik</h2>
-      <table>
-        <tr><th>Kategori</th><th>Dağıtım</th></tr>
-        <tr><td>Geliştirme</td><td>25%</td></tr>
-        <tr><td>Staking Ödülleri</td><td>20%</td></tr>
-        <tr><td>Likidite</td><td>15%</td></tr>
-        <tr><td>Tanıtım</td><td>10%</td></tr>
-        <tr><td>Takım</td><td>10%</td></tr>
-        <tr><td>Danışmanlar</td><td>5%</td></tr>
-        <tr><td>Rezerv</td><td>15%</td></tr>
-      </table>
+      <div class="tokenomics-container">
+        <table>
+          <thead>
+            <tr><th>Kategori</th><th>Dağıtım</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Geliştirme</td><td>25%</td></tr>
+            <tr><td>Staking Ödülleri</td><td>20%</td></tr>
+            <tr><td>Likidite</td><td>15%</td></tr>
+            <tr><td>Tanıtım</td><td>10%</td></tr>
+            <tr><td>Takım</td><td>10%</td></tr>
+            <tr><td>Danışmanlar</td><td>5%</td></tr>
+            <tr><td>Rezerv</td><td>15%</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
+    
     <section>
       <h2>Yol Haritası</h2>
-      <p><strong>2025 3. Çeyrek:</strong> Web sitesi yayını, token dağıtımı, whitepaper yayınlanması</p>
-      <p><strong>2025 4. Çeyrek:</strong> CEX listelenmesi, DAO aktivasyonu, staking başlatılması</p>
-      <p><strong>2026 1. Çeyrek:</strong> NFT Modülü, yönetim genişlemesi, mobil uygulama betası</p>
-      <p><strong>2026 2. Çeyrek:</strong> Ekosistem ortaklıkları, Qionex Labs lansmanı</p>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <h3>2025 3. Çeyrek</h3>
+          <p>Web sitesi yayını, token dağıtımı, whitepaper yayınlanması</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2025 4. Çeyrek</h3>
+          <p>CEX listelenmesi, DAO aktivasyonu, staking başlatılması</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2026 1. Çeyrek</h3>
+          <p>NFT Modülü, yönetim genişlemesi, mobil uygulama betası</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2026 2. Çeyrek</h3>
+          <p>Ekosistem ortaklıkları, Qionex Labs lansmanı</p>
+        </div>
+      </div>
     </section>
   </div>
 
+  <!-- Chinese Content -->
+  <div class="lang" id="zh" lang="zh">
+    <header>
+      <h1>Qionex (QNX)</h1>
+      <p>基于Polygon网络的未来代币，具备DAO、质押、保护和创新功能。</p>
+      <a class="btn" href="https://app.uniswap.org/#/swap?outputCurrency=0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea&chain=polygon" target="_blank" rel="noopener noreferrer">购买 QNX</a>
+      <a class="btn" href="whitepaper.pdf" download>下载白皮书</a>
+    </header>
+    
+    <section>
+      <div class="contract-address">
+        <p><strong>合约地址:</strong><br>
+        <span id="contract-zh">0xa74d71ee3630784de1cf2bfbd5018e5858bd55ea</span></p>
+        <button class="copy-btn" onclick="copyToClipboard('contract-zh')">复制地址</button>
+      </div>
+      <p><strong>网络:</strong> Polygon<br><strong>总供应量:</strong> 1,500,000,000 QNX</p>
+    </section>
+    
+    <section>
+      <h2>代币经济学</h2>
+      <div class="tokenomics-container">
+        <table>
+          <thead>
+            <tr><th>类别</th><th>分配</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>开发</td><td>25%</td></tr>
+            <tr><td>质押奖励</td><td>20%</td></tr>
+            <tr><td>流动性</td><td>15%</td></tr>
+            <tr><td>营销</td><td>10%</td></tr>
+            <tr><td>团队</td><td>10%</td></tr>
+            <tr><td>顾问</td><td>5%</td></tr>
+            <tr><td>储备</td><td>15%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+    <section>
+      <h2>路线图</h2>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <h3>2025年第三季度</h3>
+          <p>网站启动、代币部署、白皮书发布</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2025年第四季度</h3>
+          <p>CEX上市、DAO激活、质押上线</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2026年第一季度</h3>
+          <p>NFT模块、治理扩展、移动应用测试版</p>
+        </div>
+        <div class="roadmap-item">
+          <h3>2026年第二季度</h3>
+          <p>生态系统合作伙伴关系、Qionex实验室启动</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Success Message -->
+  <div id="copy-success" class="copy-success">Address copied to clipboard!</div>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Qionex. All rights reserved. | Telegram: @Qionex | GitHub: Husyn66</p>
+    <p>&copy; 2025 Qionex. All rights reserved. | 
+    <a href="https://t.me/Qionex" target="_blank" rel="noopener noreferrer">Telegram: @Qionex</a> | 
+    <a href="https://github.com/Husyn66" target="_blank" rel="noopener noreferrer">GitHub: Husyn66</a></p>
   </footer>
 
   <script>
+    // Global variables for better code organization
+    const LANGUAGES = ['en', 'ru', 'tr', 'zh'];
+    let currentLanguage = 'en';
+
+    /**
+     * Set the active language and update UI accordingly
+     * @param {string} lang - Language code to activate
+     */
     function setLang(lang) {
-      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
-      document.getElementById(lang).classList.add('active');
+      // Validate language code
+      if (!LANGUAGES.includes(lang)) {
+        console.warn(`Invalid language code: ${lang}`);
+        return;
+      }
+
+      // Remove active class from all language sections
+      document.querySelectorAll('.lang').forEach(element => {
+        element.classList.remove('active');
+      });
+
+      // Remove active class from all language buttons
+      document.querySelectorAll('#lang-buttons button').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Activate selected language
+      const targetLangElement = document.getElementById(lang);
+      const targetButtonElement = document.querySelector(`#lang-buttons button[onclick="setLang('${lang}')"]`);
+      
+      if (targetLangElement && targetButtonElement) {
+        targetLangElement.classList.add('active');
+        targetButtonElement.classList.add('active');
+        currentLanguage = lang;
+        
+        // Update page language attribute for accessibility
+        document.documentElement.lang = lang;
+        
+        // Store user's language preference
+        try {
+          localStorage.setItem('qionex-preferred-language', lang);
+        } catch (error) {
+          console.warn('Unable to save language preference:', error);
+        }
+      } else {
+        console.error(`Language elements not found for: ${lang}`);
+      }
     }
+
+    /**
+     * Copy text content to clipboard with enhanced error handling
+     * @param {string} elementId - ID of element containing text to copy
+     */
+    async function copyToClipboard(elementId) {
+      const element = document.getElementById(elementId);
+      if (!element) {
+        console.error(`Element with ID '${elementId}' not found`);
+        return;
+      }
+
+      const textToCopy = element.textContent.trim();
+      
+      try {
+        // Use modern Clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(textToCopy);
+          showCopySuccess();
+        } else {
+          // Fallback for older browsers
+          fallbackCopyToClipboard(textToCopy);
+        }
+      } catch (error) {
+        console.error('Failed to copy to clipboard:', error);
+        // Try fallback method
+        fallbackCopyToClipboard(textToCopy);
+      }
+    }
+
+    /**
+     * Fallback method for copying to clipboard in older browsers
+     * @param {string} text - Text to copy
+     */
+    function fallbackCopyToClipboard(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showCopySuccess();
+        } else {
+          throw new Error('Copy command failed');
+        }
+      } catch (error) {
+        console.error('Fallback copy failed:', error);
+        // Show manual copy instruction as last resort
+        alert(`Please copy manually: ${text}`);
+      } finally {
+        document.body.removeChild(textArea);
+      }
+    }
+
+    /**
+     * Display success message when address is copied
+     */
+    function showCopySuccess() {
+      const successElement = document.getElementById('copy-success');
+      successElement.classList.add('show');
+      
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        successElement.classList.remove('show');
+      }, 3000);
+    }
+
+    /**
+     * Initialize the page when DOM is loaded
+     */
+    function initializePage() {
+      // Try to load user's preferred language
+      try {
+        const savedLanguage = localStorage.getItem('qionex-preferred-language');
+        if (savedLanguage && LANGUAGES.includes(savedLanguage)) {
+          setLang(savedLanguage);
+          return;
+        }
+      } catch (error) {
+        console.warn('Unable to load language preference:', error);
+      }
+
+      // Try to detect browser language
+      const browserLang = navigator.language.substring(0, 2);
+      if (LANGUAGES.includes(browserLang)) {
+        setLang(browserLang);
+      } else {
+        // Default to English
+        setLang('en');
+      }
+    }
+
+    /**
+     * Add keyboard navigation support for language buttons
+     */
+    function setupKeyboardNavigation() {
+      document.querySelectorAll('#lang-buttons button').forEach(button => {
+        button.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            button.click();
+          }
+        });
+      });
+    }
+
+    // Initialize page when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      initializePage();
+      setupKeyboardNavigation();
+    });
+
+    // Handle visibility change to potentially refresh data
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        // Page became visible, could refresh data here if needed
+        console.log('Page is now visible');
+      }
+    });
   </script>
 </body>
 </html>
