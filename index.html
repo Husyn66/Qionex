@@ -9,38 +9,58 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- QIONEX_BUILD_TOKEN: FX-v1.3 -->
+  <!-- QIONEX_BUILD_TOKEN: FX-v2.0 -->
   <style>
-    :root{
-      /* Твои цвета */
-      --primary-color:#00ffcc; --primary-hover:#00cc99;
-      --text-primary:#fff; --text-secondary:#aaaaaa;
-      --border-color:#555; --card-background:#222;
+    :root {
+      --primary-color: #00ffcc;
+      --primary-hover: #00cc99;
+      --background-dark: #0f0f0f;
+      --background-secondary: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #aaaaaa;
+      --border-color: #555555;
+      --card-background: #222222;
 
-      /* Космос */
-      --bg1:#0b1020; --bg2:#101a3a; --glass:rgba(8,12,24,.6); --line:rgba(255,255,255,.08);
-      --glow:#6ee7ff; --violet:#8a7dff;
+      /* Космос и эффекты */
+      --bg1:#0b1020;
+      --bg2:#101a3a;
+      --glass: rgba(8,12,24,.6);
+      --line-soft: rgba(255,255,255,.08);
+      --glow:#6ee7ff;
+      --violet:#8a7dff;
 
-      /* Каркас */
+      /* Новый тёплый перелив */
+      --sun:#ffe08a; /* бледно-жёлтый */
+      --sea:#00ffcc; /* бирюзовый */
+
       --container:1200px;
       --radius:16px;
       --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    *{box-sizing:border-box}
+    * { box-sizing: border-box; }
     html,body{height:100%}
-    body{
-      margin:0; font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
-      color:var(--text-primary); text-align:center; line-height:1.6; overflow-x:hidden;
-      /* Живой космический фон */
-      background:
-        radial-gradient(1200px 800px at 10% 10%, #121a36 0%, transparent 60%),
-        radial-gradient(1000px 700px at 90% 20%, #0f1b3a 0%, transparent 60%),
-        linear-gradient(120deg, var(--bg1), var(--bg2));
-      background-attachment:fixed; animation:bgShift 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgShift{0%{background-position:0 0,0 0,0 0}100%{background-position:30px -40px,-40px 30px,0 0}}
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-primary);
+      text-align: center;
+      line-height: 1.6;
+      overflow-x: hidden;
 
-    /* Звёздное мерцание (лёгкий слой) */
+      /* Живой космический фон с тёплым/холодным отблеском */
+      background:
+        radial-gradient(1200px 800px at 10% 10%, rgba(255,224,138,0.12) 0%, transparent 60%),
+        radial-gradient(1000px 700px at 90% 20%, rgba(0,255,204,0.10) 0%, transparent 60%),
+        linear-gradient(120deg, var(--bg1), var(--bg2));
+      background-attachment: fixed;
+      animation: bgShift 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift{
+      0%{ background-position: 0 0, 0 0, 0 0; }
+      100%{ background-position: 30px -40px, -40px 30px, 0 0; }
+    }
+
+    /* Звёзды (приглушено) */
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none; z-index:-2;
       background-image:
@@ -49,17 +69,17 @@
         radial-gradient(1px 1px at 35% 80%, rgba(255,255,255,.35) 50%, transparent 52%),
         radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,.55) 50%, transparent 52%),
         radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,.40) 50%, transparent 52%);
-      opacity:.65; animation:twinkle 4s ease-in-out infinite alternate;
+      opacity:.45; animation: twinkle 5s ease-in-out infinite alternate;
     }
-    @keyframes twinkle{0%{opacity:.45}100%{opacity:.75}}
+    @keyframes twinkle{ 0%{opacity:.45} 100%{opacity:.75} }
 
-    /* «Северное сияние» мягкими бликами */
+    /* «Северное сияние» */
     .aurora{
       position:fixed; inset:-10% -10% auto -10%; height:60vh; z-index:-1; pointer-events:none;
       background:
         radial-gradient(60% 120% at 10% 50%, rgba(66,227,255,.08), transparent 60%),
         radial-gradient(60% 120% at 90% 40%, rgba(138,125,255,.08), transparent 60%),
-        radial-gradient(40% 80% at 60% 80%, rgba(255,255,255,.06), transparent 70%);
+        radial-gradient(40% 80%  at 60% 80%, rgba(255,255,255,.06), transparent 70%);
       filter: blur(10px);
       animation: auroraShift 24s ease-in-out infinite alternate;
     }
@@ -68,139 +88,207 @@
       100%{ transform: translateY(15px) }
     }
 
-    /* Общие карточки для header/section/footer */
-    header, section, footer{
-      background:var(--glass); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
-      max-width:var(--container); margin:20px auto; padding:24px;
+    /* Перелив «солнечный» жёлтый ↔ бирюзовый */
+    .solar-pulse{
+      position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background:
+        radial-gradient(60% 80% at 30% 35%, rgba(255,224,138,0.18), transparent 60%),
+        radial-gradient(60% 80% at 70% 65%, rgba(0,255,204,0.16), transparent 60%);
+      animation: solarFade 18s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+      filter: blur(4px);
+    }
+    @keyframes solarFade{
+      0%   { opacity: 0.55; transform: translateY(-6px); }
+      50%  { opacity: 0.85; transform: translateY(0);    }
+      100% { opacity: 0.55; transform: translateY(6px);  }
     }
 
-    /* Шапка */
+    /* Карточки */
+    header, section, footer{
+      background:var(--glass); border:1px solid var(--line-soft); border-radius:var(--radius); box-shadow:var(--shadow);
+      max-width:var(--container); margin:20px auto; padding:24px;
+    }
     header{ position:relative; }
     header::after{
       content:""; position:absolute; left:5%; right:5%; bottom:14px; height:2px;
       background:linear-gradient(90deg, transparent, var(--glow), transparent);
-      filter:blur(0.8px); opacity:.7; animation:lineSweep 8s linear infinite;
+      filter:blur(0.8px); opacity:.7; animation: lineSweep 8s linear infinite;
     }
-    @keyframes lineSweep{0%{transform:translateX(-8%)}100%{transform:translateX(8%)}}
+    @keyframes lineSweep{ 0%{transform:translateX(-8%)} 100%{transform:translateX(8%)} }
 
-    h1{
+    h1 {
       font-size: clamp(2.5em, 5vw, 4em);
       color: var(--primary-color);
       margin: 0 0 20px 0;
-      text-shadow: 0 0 20px rgba(0,255,204,.3);
+      text-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
       animation: glow 2s ease-in-out infinite alternate;
     }
-    @keyframes glow{from{ text-shadow:0 0 20px rgba(0,255,204,.3)}to{ text-shadow:0 0 30px rgba(0,255,204,.6)}}
-
-    /* Language buttons */
-    #lang-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px auto;max-width:var(--container)}
-    #lang-buttons button{
-      padding:10px 15px; background:#1a1f2b; color:var(--text-primary); border:2px solid transparent; border-radius:10px;
-      cursor:pointer; font-weight:600; font-size:14px; transition:.25s; box-shadow:0 0 0 rgba(110,231,255,0);
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(0, 255, 204, 0.3); }
+      to   { text-shadow: 0 0 30px rgba(0, 255, 204, 0.6); }
     }
-    #lang-buttons button:hover, #lang-buttons button.active{background:var(--primary-color);color:#000;border-color:var(--primary-color);transform:translateY(-2px);box-shadow:0 0 18px rgba(110,231,255,.35)}
 
-    /* Кнопки действий */
-    .btn{
-      display:inline-block; padding:15px 30px; border-radius:12px; text-decoration:none; font-weight:700; color:#071324;
-      background:linear-gradient(90deg, var(--primary-color), var(--primary-hover)); margin:15px 10px;
-      transition:transform .25s, box-shadow .25s; box-shadow:0 4px 15px rgba(0,255,204,.3);
+    /* Языки */
+    #lang-buttons {
+      margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; max-width:var(--container)
     }
-    .btn:hover{transform:translateY(-3px); box-shadow:0 6px 25px rgba(0,255,204,.5)}
-    .btn:active{transform:translateY(-1px)}
+    #lang-buttons button {
+      padding: 10px 15px; background: #1a1f2b; color: var(--text-primary);
+      border: 2px solid transparent; border-radius: 10px; cursor: pointer; font-weight: 600;
+      transition: all 0.25s ease; font-size: 14px; box-shadow:0 0 0 rgba(110,231,255,0);
+    }
+    #lang-buttons button:hover, #lang-buttons button.active {
+      background: var(--primary-color); color: #000; border-color: var(--primary-color); transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(110,231,255,.35);
+    }
 
-    .contract-address{
-      background:var(--card-background); padding:20px; border-radius:12px; margin:20px auto; max-width:600px;
-      border:1px solid var(--border-color); word-break:break-all; position:relative; box-shadow:0 10px 24px rgba(0,0,0,.35);
+    /* Кнопки */
+    .btn {
+      display: inline-block; padding: 15px 30px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: #000; font-weight: 700; border-radius: 12px; text-decoration: none;
+      margin: 15px 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+      position: relative; overflow: hidden;
     }
-    .copy-btn{
-      background:var(--primary-color); color:#000; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;
-      font-weight:600; transition:.25s; box-shadow:0 0 16px rgba(110,231,255,.25)
-    }
-    .copy-btn:hover{background:var(--primary-hover); transform:scale(1.05)}
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0, 255, 204, 0.5); }
+    .btn:active { transform: translateY(-1px); }
 
-    .lang{display:none; animation:fadeIn .5s ease-in-out}
-    .lang.active{display:block}
-    @keyframes fadeIn{from{opacity:0; transform:translateY(20px)}to{opacity:1; transform:translateY(0)}}
+    .contract-address {
+      background: var(--card-background); padding: 20px; border-radius: 12px; margin: 20px auto; max-width: 600px;
+      border: 1px solid var(--border-color); word-break: break-all; position: relative; box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    }
+    .copy-btn {
+      background: var(--primary-color); color: #000; border: none; padding: 8px 16px; border-radius: 8px;
+      cursor: pointer; font-weight: 600; margin-top: 10px; transition: all 0.25s ease; box-shadow:0 0 16px rgba(110,231,255,.25);
+    }
+    .copy-btn:hover { background: var(--primary-hover); transform: scale(1.05); }
+
+    .lang { display: none; animation: fadeIn 0.5s ease-in-out; }
+    .lang.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
 
     /* Таблицы */
-    .tokenomics-container{overflow-x:auto; margin:30px 0}
-    table{
-      margin:20px auto; border-collapse:collapse; color:var(--text-primary); background:rgba(10,15,28,.7);
-      border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.3); min-width:300px;
+    .tokenomics-container { overflow-x: auto; margin: 30px 0; }
+    table {
+      margin: 20px auto; border-collapse: collapse; color: var(--text-primary); background: rgba(10,15,28,.7);
+      border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); min-width: 300px;
     }
-    th,td{border:1px solid var(--border-color); padding:15px 20px; text-align:left}
-    th{background:linear-gradient(135deg, var(--glow), var(--violet)); color:#000; font-weight:700; letter-spacing:1px; text-transform:uppercase}
-    tr:nth-child(even){background:rgba(255,255,255,.04)}
-    tr:hover{background:rgba(0,255,204,.08)}
+    th, td { border: 1px solid var(--border-color); padding: 15px 20px; text-align: left; }
+    th {
+      background: linear-gradient(135deg, var(--glow), var(--violet));
+      color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    }
+    tr:nth-child(even) { background: rgba(255, 255, 255, 0.05); }
+    tr:hover { background: rgba(0, 255, 204, 0.1); }
 
-    /* Roadmap grid */
-    .roadmap{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin:30px 0; padding:0 20px; max-width:var(--container); margin-left:auto; margin-right:auto
+    /* ROADMAP */
+    .roadmap {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px; margin: 30px 0; padding: 0 20px; max-width: 1200px; margin-left: auto; margin-right: auto;
     }
-    .roadmap-item{
-      background:var(--card-background); padding:25px; border-radius:12px; border:1px solid var(--border-color);
-      transition:.25s; position:relative; box-shadow:0 10px 24px rgba(0,0,0,.35)
+    .roadmap-item {
+      background: var(--card-background); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color);
+      transition: all 0.25s ease; position: relative; box-shadow: 0 10px 24px rgba(0,0,0,.35);
     }
-    .roadmap-item:hover{transform:translateY(-5px); box-shadow:0 10px 30px rgba(0,255,204,.2); border-color:var(--primary-color)}
-    .roadmap-item h3{color:var(--primary-color); margin-top:0; font-size:1.3em}
+    .roadmap-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,204,0.2); border-color: var(--primary-color); }
+    .roadmap-item h3 { color: var(--primary-color); margin-top: 0; font-size: 1.3em; }
 
-    /* Divider waves */
-    .divider{position:relative;height:80px;overflow:hidden;margin:24px auto; max-width:var(--container)}
-    .divider::before{
+    /* Усиленные разделители */
+    .divider{
+      position:relative; height:90px; overflow:hidden; margin:28px auto; max-width:1200px;
+    }
+    .divider::before,
+    .divider::after{
       content:""; position:absolute; inset:0;
-      background: radial-gradient(closest-side, rgba(110,231,255,.25), transparent 70%) 0 50%/220px 220px repeat-x;
-      filter: blur(1px); animation:wave 12s linear infinite; opacity:.7;
+      background:
+        radial-gradient(closest-side, rgba(255,224,138,0.30), transparent 68%) 0 55%/260px 260px repeat-x; /* жёлтая волна */
+      filter: blur(1.2px);
+      animation: wave 10s linear infinite;
+      opacity:.9;
     }
-    @keyframes wave{to{transform:translateX(-220px)}}
+    .divider::after{
+      background:
+        radial-gradient(closest-side, rgba(0,255,204,0.28), transparent 68%) 130px 52%/260px 260px repeat-x; /* бирюзовая волна */
+      animation-duration: 12s;
+      opacity:.85;
+    }
+    .divider > i{
+      position:absolute; left:-10%; right:-10%; top:50%; height:2px;
+      background: linear-gradient(90deg, transparent, rgba(0,255,204,.9), transparent);
+      filter: blur(.8px); animation: lineSweep 7s linear infinite; opacity:.8;
+    }
+    @keyframes wave{ to{ transform: translateX(-260px) } }
 
-    /* Footer */
-    footer{font-size:.9em; color:var(--text-secondary)}
-
-    /* Метеоры (опциональные, можно отключить кнопкой FX) */
-    .shooters{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:-1}
+    /* Кометы — крупные с хвостом, каждые ~20 сек */
+    .shooters{
+      position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:-1;
+    }
     .shooters i{
-      position:absolute; top:-20px; width:2px; height:2px; background:linear-gradient(180deg, white, rgba(255,255,255,0));
-      opacity:.9; transform:rotate(45deg); animation:fall 9s linear infinite;
-      filter:drop-shadow(0 0 6px rgba(110,231,255,.8));
+      position:absolute;
+      top:-60px;
+      width: 8px;                 /* толщина головы */
+      height: 200px;              /* длина хвоста */
+      border-radius: 50%;
+      transform: rotate(45deg);
+      background: linear-gradient(180deg,
+        rgba(255,255,255,1) 0%,
+        rgba(255,224,138,0.9) 25%,
+        rgba(0,255,204,0.85) 55%,
+        rgba(0,255,204,0.0) 100%);
+      opacity: 0;
+      filter:
+        drop-shadow(0 0 16px rgba(255,224,138,0.9))
+        drop-shadow(0 0 28px rgba(0,255,204,0.85));
+      animation: comet 60s linear infinite; /* полный цикл 60s */
     }
-    @keyframes fall{0%{transform:translate(-10vw,-10vh) rotate(45deg);opacity:0}10%{opacity:.9}100%{transform:translate(110vw,110vh) rotate(45deg);opacity:0}}
-    .shooters i:nth-child(1){left:12%; animation-duration:10s; animation-delay:1s}
-    .shooters i:nth-child(2){left:46%; animation-duration:12s; animation-delay:3s}
-    .shooters i:nth-child(3){left:78%; animation-duration:11s; animation-delay:5s}
+    @keyframes comet{
+      0%   { transform: translate(-10vw, -10vh) rotate(45deg); opacity: 0; }
+      2%   { opacity: 1; }
+      12%  { opacity: 1; }  /* видимость ~6s из 60s */
+      15%  { transform: translate(110vw, 110vh) rotate(45deg); opacity: 0; }
+      100% { transform: translate(110vw, 110vh) rotate(45deg); opacity: 0; }
+    }
+    .shooters i:nth-child(1){
+      left: 18%;
+      width: 8px; height: 220px;
+      animation-delay: 0s;      /* старт сразу */
+    }
+    .shooters i:nth-child(2){
+      left: 50%;
+      width: 10px; height: 260px; /* самая большая комета */
+      animation-delay: 20s;     /* через 20s */
+    }
+    .shooters i:nth-child(3){
+      left: 78%;
+      width: 7px; height: 200px;
+      animation-delay: 40s;     /* через 40s */
+    }
 
-    /* Кнопка FX ON/OFF */
-    .fx-toggle{
-      position:fixed; right:14px; bottom:14px; z-index:9999; border:none; cursor:pointer;
-      background:linear-gradient(90deg,var(--glow),var(--violet)); color:#071324; border-radius:12px; padding:10px 14px; font-weight:800;
-      box-shadow:0 12px 24px rgba(0,0,0,.35)
-    }
-    .fx-toggle:hover{filter:brightness(1.05)}
-    .copy-success{
+    /* Сервисные стили */
+    .loading { opacity: 0.7; pointer-events: none; }
+    button:focus, .btn:focus, .copy-btn:focus { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+    .copy-success {
       position: fixed; top: 20px; right: 20px; background: var(--primary-color); color: #000;
       padding: 12px 20px; border-radius: 8px; font-weight: 600; z-index: 10000; transform: translateX(100%);
-      transition: transform .3s ease; box-shadow:0 10px 24px rgba(0,0,0,.35);
+      transition: transform 0.3s ease; box-shadow: 0 10px 24px rgba(0,0,0,.35);
     }
-    .copy-success.show{transform:translateX(0)}
+    .copy-success.show { transform: translateX(0); }
 
-    /* Mobile */
-    @media (max-width:768px){
-      header{padding:30px 16px}
-      .btn{display:block; margin:10px auto; max-width:260px}
-      #lang-buttons{padding:0 10px}
-      table{font-size:14px}
-      th,td{padding:10px 12px}
+    @media (max-width: 768px) {
+      header { padding: 40px 15px; }
+      .btn { display: block; margin: 10px auto; max-width: 260px; }
+      #lang-buttons { padding: 0 10px; }
+      table { font-size: 14px; }
+      th, td { padding: 10px 12px; }
     }
-
-    /* OFF state для эффектов */
-    .no-fx::before, .no-fx .aurora, .no-fx .shooters{ display:none !important; }
   </style>
 </head>
 <body>
-  <!-- Слои эффектов -->
+  <!-- Слои эффекта -->
   <div class="aurora" aria-hidden="true"></div>
+  <div class="solar-pulse" aria-hidden="true"></div>
   <div class="shooters" aria-hidden="true"><i></i><i></i><i></i></div>
-  <button id="fxToggle" class="fx-toggle" type="button">FX: ON</button>
 
   <!-- Language Selection Buttons -->
   <div id="lang-buttons" role="navigation" aria-label="Language selection">
@@ -229,7 +317,7 @@
       <p><strong>Network:</strong> Polygon<br><strong>Total Supply:</strong> 1,500,000,000 QNX</p>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>Tokenomics</h2>
@@ -249,7 +337,7 @@
       </div>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>Roadmap</h2>
@@ -281,7 +369,7 @@
       <p><strong>Сеть:</strong> Polygon<br><strong>Общее предложение:</strong> 1,500,000,000 QNX</p>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>Токеномика</h2>
@@ -301,7 +389,7 @@
       </div>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>Дорожная карта</h2>
@@ -333,7 +421,7 @@
       <p><strong>Ağ:</strong> Polygon<br><strong>Toplam Arz:</strong> 1,500,000,000 QNX</p>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>Tokenomik</h2>
@@ -353,7 +441,7 @@
       </div>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>Yol Haritası</h2>
@@ -385,7 +473,7 @@
       <p><strong>网络:</strong> Polygon<br><strong>总供应量:</strong> 1,500,000,000 QNX</p>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>代币经济学</h2>
@@ -405,7 +493,7 @@
       </div>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
+    <div class="divider" aria-hidden="true"><i></i></div>
 
     <section>
       <h2>路线图</h2>
@@ -487,17 +575,6 @@
           setLang(LANGUAGES.includes(browserLang) ? browserLang : 'en');
         }
       } catch { setLang('en'); }
-
-      // FX toggle state
-      const fxToggle = document.getElementById('fxToggle');
-      const savedFx = (localStorage.getItem('qionex-fx') || 'on');
-      if (savedFx === 'off') { document.body.classList.add('no-fx'); fxToggle.textContent = 'FX: OFF'; }
-      fxToggle.addEventListener('click', ()=>{
-        document.body.classList.toggle('no-fx');
-        const on = !document.body.classList.contains('no-fx');
-        fxToggle.textContent = 'FX: ' + (on ? 'ON' : 'OFF');
-        try{ localStorage.setItem('qionex-fx', on ? 'on' : 'off'); }catch{}
-      });
     }
 
     function setupKeyboardNavigation() {
